@@ -1,0 +1,26 @@
+{
+  "name": "bulldogs",
+  "version": "1.0.0",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1",
+    "nodemon": "^1.19.4"
+  },
+  "description": "What is Bulldogs?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jericoluislua/bulldogs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jericoluislua/bulldogs/issues"
+  },
+  "homepage": "https://github.com/jericoluislua/bulldogs#readme"
+}
