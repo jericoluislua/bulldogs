@@ -4,7 +4,7 @@ import './App.css';
 
 class App extends Component{
 
-    state = {
+    /*state = {
         players: [],
         player: {
             username: 'flaxh13',
@@ -13,7 +13,7 @@ class App extends Component{
             lastName: 'Axhanela',
             jerseyNumber: '13'
         }
-    };
+    };*/
 
     componentDidMount()
     {
@@ -34,7 +34,7 @@ class App extends Component{
         ${player.username}&password=${player.password}&firstName=${player.firstName}&lastName=${player.lastName}&jerseyNumber=${player.jerseyNumber}`)
             .then(this.getPlayers)
             .catch(err => console.error(err))
-    }
+    };
 
     renderPlayer = ({p_id, username}) => <div key={p_id}>{username}</div>;
 
