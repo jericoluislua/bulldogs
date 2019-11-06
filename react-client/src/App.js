@@ -4,16 +4,16 @@ import './App.css';
 
 class App extends Component{
 
-    /*state = {
+    state = {
         players: [],
         player: {
-            username: 'flaxh13',
-            password: 'Bulldogs12345',
-            firstName: 'Florian',
-            lastName: 'Axhanela',
-            jerseyNumber: '13'
+            // username: 'flaxh13',
+            //  password: 'Bulldogs12345',
+            //  firstName: 'Florian',
+            //  lastName: 'Axhanela',
+            //  jerseyNumber: '13'
         }
-    };*/
+    };
 
     componentDidMount()
     {
