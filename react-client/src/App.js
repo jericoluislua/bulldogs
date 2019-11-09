@@ -13,7 +13,16 @@ import WeightDifferencePage from "./components/pages/WeightDifferencePage/Weight
 import PlayerStatsPage from "./components/pages/PlayerStatsPage/PlayerStatsPage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 
-class App extends Component{
+export default class App extends Component{
+
+    constructor() {
+        super();
+
+        this.state = {
+            loggedInStatus: "NOT_LOGGED_IN",
+            user: {}
+        }
+    }
 
 
     render() {
@@ -22,7 +31,13 @@ class App extends Component{
                 <Navbar/>
                 <Switch>
                     {/*exact makes homepage the default*/}
-                    <Route exact path="/" component={HomePage}/>
+                    <Route
+                        exact
+                        path={"/"}
+                        render={props => (
+                            <HomePage {...props} loggedInStatus={this.state.loggedInStatus}/>
+                            )}
+                    />
                     <Route path="/height-difference" component={HeightDifferencePage}/>
                     <Route path="/weight-difference" component={WeightDifferencePage}/>
                     <Route path="/player-stats" component={PlayerStatsPage}/>
@@ -34,7 +49,6 @@ class App extends Component{
 
 }
 
-export default App;
 
 
 

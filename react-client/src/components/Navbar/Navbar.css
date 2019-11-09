@@ -126,9 +126,15 @@
 }
 
 
+.nav-wrapper{
+    background-color: #de230e;
+    color: black;
 
+}
 
-
+.nav-wrapper li{
+    color: black;
+}
 
 
 
@@ -141,13 +147,6 @@
 @font-face {
     font-family: "Bulldogs";
     src: url("../../fonts/aspire-smallcaps/AspireSC-Regular.ttf");
-}
-
-#nBrand {
-}
-
-#nBrand {
-    font-family: Bulldogs;
 }
 
 
