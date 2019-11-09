@@ -1,11 +1,12 @@
-//rcjc for automatic class creation
+//rcc for automatic class creation
 import './Navbar.css';
 import React from 'react';
-import bulldogsFont from '../../fonts/aspire-smallcaps/AspireSC-Regular.ttf';
+import { Link } from "react-router-dom";
+
 function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
-            <a className="navbar-brand text-uppercase center" id="nBrand" href="#">Bulldogs</a>
+            <Link className="navbar-brand text-uppercase center" id="nBrand" to="">Bulldogs</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -15,10 +16,13 @@ function Navbar() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <a className="nav-link text-uppercase" href="#">Home <span className="sr-only">(current)</span></a>
+                        <Link className="nav-link text-uppercase" to="player-stats">Stats <span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link text-uppercase" href="#">Link</a>
+                        <Link className="nav-link text-uppercase" to="height-difference">Height difference</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link text-uppercase" to="weight-difference">Weight difference</Link>
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
