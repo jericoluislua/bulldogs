@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "p_id": 1,
+      "username": "jllua07",
+      "password": "Jericoaomine5",
+      "firstName": "Jerico Luis",
+      "lastName": "Lua",
+      "jerseyNumber": 7,
+      "height": null,
+      "weight": null,
+      "isFormer": 1,
+      "isAdmin": 1
+    },
+    {
+      "p_id": 2,
+      "username": "nsest06",
+      "password": "18cdd9b50fe6961213975a7842203faeb97c68bb",
+      "firstName": "Neil Sean",
+      "lastName": "Estefanio",
+      "jerseyNumber": 6,
+      "height": null,
+      "weight": null,
+      "isFormer": null,
+      "isAdmin": null
+    },
+    {
+      "p_id": 3,
+      "username": "almga04",
+      "password": "Bulldogs12345",
+      "firstName": "Alex",
+      "lastName": "Moser Garcia",
+      "jerseyNumber": 4,
+      "height": null,
+      "weight": null,
+      "isFormer": null,
+      "isAdmin": null
+    },
+    {
+      "p_id": 4,
+      "username": "flaxh13",
+      "password": "Bulldogs12345",
+      "firstName": "Florian",
+      "lastName": "Axhanela",
+      "jerseyNumber": 13,
+      "height": null,
+      "weight": null,
+      "isFormer": null,
+      "isAdmin": null
+    },
+    {
+      "p_id": 8,
+      "username": "alalh77",
+      "password": "Bulldogs12345",
+      "firstName": "Al Aliwa",
+      "lastName": "Al Hassan",
+      "jerseyNumber": 77,
+      "height": null,
+      "weight": null,
+      "isFormer": null,
+      "isAdmin": null
+    }
+  ]
+}

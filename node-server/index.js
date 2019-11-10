@@ -1,6 +1,77 @@
+{/*const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const bcrypt = require('bcrypt');
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(express.json());
+
+const players = [];
+
+app.get('/players', (req, res) =>{
+   res.json(players);
+});
+
+app.post('/players', async (req, res) => {
+    try{
+        const salt = await bcrypt.genSalt();
+        hashedPassword = await bcrypt.hash(req.body.password, salt);
+        console.log(salt);
+        console.log(hashedPassword);
+        const player = {
+            username: req.body.username,
+            password: hashedPassword,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            jerseyNumber: req.body.jerseyNumber};
+        players.push(player);
+        res.status(201).send();
+
+    }
+    catch {
+        res.status(500).send();
+    }
+});
+
+app.post('/players/login', async (req, res) => {
+    const player = players.find(player => player.username = req.body.username);
+
+    if(player == null) {
+        return res.status(400).send('Cannot find player');
+    }
+    try{
+        if (await bcrypt.compare(req.body.password, player.password)) {
+            res.send('Logged in');
+        }else{
+            res.send('Not allowed');
+        }
+    }
+    catch {
+        res.status(500).send();
+    }
+
+
+    app.listen(4000);
+});*/}
+
+
+
+
+
+
+
+
+
+
+
+
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
+const bcrypt = require('bcrypt');
+
 
 const app = express();
 
@@ -67,3 +138,5 @@ connection.query(err => {
         console.log('Connected to the MySQL server');
     }
 });
+
+

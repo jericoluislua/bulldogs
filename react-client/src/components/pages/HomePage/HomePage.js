@@ -4,54 +4,47 @@ import './HomePage.css';
 
 export default class HomePage extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            username: '',
-            password: '',
-            LoginErrors: '',
-        };
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-
-    }
-
-    handleSubmit(event) {
-        console.log = "Form submitted";
-        const { username, password } = this.state;
-
-        axios.post(
-            "http://localhost:3000/",
-            {
-                user: {
-                    username: username,
-                    password: password
-                }
-            },
-            { withCredentials: true }
-        )
-            .then(response => {
-                console.log("res from login", response);
-            })
-            .catch(error => {
-                console.log("login error", error)
-            });
-        event.preventDefault();
-    }
-
-    handleChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+    state = {
+        players: [],
+        player: {
+             username: '',
+              password: '',
+              firstName: '',
+              lastName: '',
+              jerseyNumber: ''
+        }
     };
 
 
 
+
+    componentDidMount()
+    {
+        this.getPlayers();
+    }
+
+    getPlayers = _ => {
+        fetch('http://localhost:4000/players')
+            .then(response => response.json())
+            .then(response => this.setState({players: response.data}))
+            .catch(err => console.error(err));
+
+    };
+
+    renderPlayer = ({p_id, username}) => <div key={p_id}>{username}</div>;
+
     render() {
+        const { players, player } = this.state;
         return (
             <div className="container">
                 <h1 className="nBrand">BULLDOGS</h1>
+                <h3>Welcome!</h3>
+                <h4>In here you will be able to track your training progress, match stats and body comparisons</h4>
+
+                {players.map(this.renderPlayer)}
+
+
+                {/*
                 <h1>Status: {this.props.loggedInStatus}</h1>
                 <div className="row d-flex justify-content-center">
 
@@ -94,7 +87,7 @@ export default class HomePage extends Component {
 
 
 
-                </div>
+                </div>*/}
             </div>
         );
     }

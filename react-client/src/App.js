@@ -26,6 +26,9 @@ export default class App extends Component{
 
 
     render() {
+
+        const { isLoggedIn } = this.state;
+
         return(
             <div className="App">
                 <Navbar/>
