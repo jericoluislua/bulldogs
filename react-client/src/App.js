@@ -11,7 +11,7 @@ import HomePage from "./components/pages/HomePage/HomePage";
 import HeightDifferencePage from "./components/pages/HeightDifferencePage/HeightDifferencePage";
 import WeightDifferencePage from "./components/pages/WeightDifferencePage/WeightDifferencePage";
 import PlayerStatsPage from "./components/pages/PlayerStatsPage/PlayerStatsPage";
-import NotFoundPage from "./components/pages/NotFoundPage";
+import NotFoundPage from "./components/NotFoundPage";
 
 export default class App extends Component{
 
