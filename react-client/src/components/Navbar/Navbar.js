@@ -1,7 +1,7 @@
 //rcc for automatic class creation
 import './Navbar.css';
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
+import {Link, NavLink, withRouter} from "react-router-dom";
 
 
 class Navbar extends Component{
@@ -9,13 +9,17 @@ class Navbar extends Component{
     logOut(e){
         e.preventDefault();
         localStorage.removeItem('playertoken');
-        this.props.history.push('');
+        this.props.history.push('/');
     }
+
     render() {
 
         const nLoggedIn = (
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
+                    <li>
+                        <NavLink className="nav-link text-uppercase" to="/register">Register</NavLink>
+                    </li>
                 </ul>
             </div>
         );
@@ -24,13 +28,16 @@ class Navbar extends Component{
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <Link className="nav-link text-uppercase" to="player-stats">Stats<span className="sr-only">(current)</span></Link>
+                        <NavLink className="nav-link text-uppercase" to="profile">Profile</NavLink>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link text-uppercase" to="height-difference">Height difference</Link>
+                        <NavLink className="nav-link text-uppercase" to="height-difference">Height difference</NavLink>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link text-uppercase" to="weight-difference">Weight difference</Link>
+                        <NavLink className="nav-link text-uppercase" to="weight-difference">Weight difference</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <a href="/" className="nav-link text-uppercase" onClick={this.logOut.bind(this)}>Logout</a>
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">

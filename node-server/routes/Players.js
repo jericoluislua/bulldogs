@@ -37,7 +37,7 @@ players.post('/register', (req, res) =>{
                        res.send("Error: " + err);
                    });
            } else {
-               res.json({error: "User already exists."});
+               res.json({error: "Player already exists."});
            }
        })
        .catch(err => {
@@ -46,7 +46,7 @@ players.post('/register', (req, res) =>{
 });
 
 //LOGIN
-players.post('', (req, res) => {
+players.post('/login', (req, res) => {
    Player.findOne({
        where: {
            username: req.body.username
@@ -65,4 +65,23 @@ players.post('', (req, res) => {
        })
 });
 
+players.get('/profile', (req, res) => {
+   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY);
+
+   Player.findOne({
+       where: {
+           id: decoded.id
+       }
+   })
+       .then(player => {
+           if(player) {
+               res.json(player)
+           } else {
+               res.send('Player does not exist.');
+           }
+       })
+       .catch(err => {
+           res.send('Error: ' + err);
+       });
+});
 module.exports = players;

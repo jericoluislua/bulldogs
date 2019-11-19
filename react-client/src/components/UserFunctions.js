@@ -10,13 +10,13 @@ export const register = newPlayer => {
             jerseyNumber: newPlayer.jerseyNumber
         })
         .then(response => {
-            console.log("Succesfully registered" + newPlayer.username)
+            console.log("Succesfully registered: " + newPlayer.username)
         });
 };
 
 export const login = player => {
     return axios
-        .post('players', {
+        .post('players/login', {
             username: player.username,
             password: player.password
         })
