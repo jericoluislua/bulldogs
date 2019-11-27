@@ -26,8 +26,7 @@ players.post('/register', (req, res) =>{
    })
        .then(player => {
            if(!player) {
-               const hash = bcrypt.hashSync(playerData.password, 10);
-               playerData.password = hash;
+               playerData.password = bcrypt.hashSync(playerData.password, 10);
                Player.create(playerData)
                    .then(player => {
                        let token = jwt.sign(player.dataValues, process.env.SECRET_KEY, { expiresIn: 1440 });
@@ -46,16 +45,16 @@ players.post('/register', (req, res) =>{
 });
 
 //LOGIN
-players.post('/login', (req, res) => {
-   Player.findOne({
+players.post('/login', async (req, res) => {
+   await Player.findOne({
        where: {
            username: req.body.username
        }
    })
        .then(player => {
            if(bcrypt.compareSync(req.body.password, player.password)) {
-               let token = jwt.sign(player.dataValues, process.env.SECRET_KEY, { expiresIn: 1440 });
-               res.json({ token: token });
+               let playertoken = jwt.sign(player.dataValues, process.env.SECRET_KEY, { expiresIn: 1440 });
+               res.json({ playertoken: playertoken });
            } else {
                res.send("Player does not exist.");
            }

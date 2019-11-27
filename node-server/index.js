@@ -12,7 +12,7 @@ app.use(
 
 const Players = require('./routes/Players');
 
-app.use("/players", Players);
+app.use("/", Players);
 
 app.listen(port, function () {
    console.log("Server is running on port: " + port);

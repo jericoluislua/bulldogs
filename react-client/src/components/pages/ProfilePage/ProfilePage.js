@@ -30,7 +30,7 @@ class ProfilePage extends Component {
         return (
             <div className="container">
                 {/*to be added: instead of "Player" it will be the player's first name*/}
-                <h1>Profile</h1>
+                <h1>Profile {this.state.username}</h1>
 
             </div>
         );

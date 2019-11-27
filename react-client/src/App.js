@@ -20,7 +20,6 @@ export default class App extends Component{
         super();
 
         this.state = {
-            loggedInStatus: "NOT_LOGGED_IN",
             user: {}
         }
     }
@@ -37,7 +36,7 @@ export default class App extends Component{
                         exact
                         path={"/"}
                         render={props => (
-                            <HomePage {...props} loggedInStatus={this.state.loggedInStatus}/>
+                            <HomePage {...props}/>
                             )}
                     />
                     <Route path="/height-difference" component={HeightDifferencePage}/>

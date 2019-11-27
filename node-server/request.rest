@@ -1,12 +1,9 @@
-POST http://localhost:4000/players/login
+POST http://localhost:4000/login
 Content-Type: application/json
 
 {
   "username": "Test",
-  "password": "passwd",
-  "firstName": "Test",
-  "lastName": "test",
-  "jerseyNumber": 1
+  "password": "passwd"
 
 }
 

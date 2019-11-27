@@ -30,7 +30,7 @@ class HomePage extends Component {
 
         login(player).then(res => {
             if (res) {
-                this.props.history.push('/player-stats')
+                this.props.history.push('/')
             }
         })
     }
@@ -88,7 +88,7 @@ class HomePage extends Component {
         return (
             <div className="container">
                 <h1 className="nBrand">BULLDOGS</h1>
-                <h3>Welcome!</h3>
+                <h3>Welcome {}!</h3>
                 {localStorage.playertoken ? loggedInText : nLoggedInText}
 
                 {!localStorage.playertoken ? logInForm : null}

@@ -1,3 +1,62 @@
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+  "username": "Test",
+  "password": "passwd"
+
+}
+
+<> 2019-11-27T110040.200.html
+
+###
+
+POST http://localhost:4000/register
+Content-Type: application/json
+
+{
+  "username": "Test",
+  "password": "passwd",
+  "firstName": "Test",
+  "lastName": "test",
+  "jerseyNumber": 1
+
+}
+
+<> 2019-11-27T110019.200.html
+
+###
+
+POST http://localhost:4000/players/register
+Content-Type: application/json
+
+{
+  "username": "Test",
+  "password": "passwd",
+  "firstName": "Test",
+  "lastName": "test",
+  "jerseyNumber": 1
+
+}
+
+<> 2019-11-27T105951.404.html
+
+###
+
+POST http://localhost:4000/players/login
+Content-Type: application/json
+
+{
+  "username": "Test",
+  "password": "passwd",
+  "firstName": "Test",
+  "lastName": "test",
+  "jerseyNumber": 1
+
+}
+
+###
+
 POST http://localhost:4000/players/login
 Content-Type: application/json
 
