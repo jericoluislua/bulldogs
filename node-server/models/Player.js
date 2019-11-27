@@ -38,11 +38,11 @@ module.exports = db.sequelize.define(
             allowNull: true
         },
         isFormer: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.TINYINT,
             allowNull: true
         },
         isAdmin: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.TINYINT,
             allowNull: true
         }
     },
