@@ -9,15 +9,60 @@ players.use(cors());
 
 process.env.SECRET_KEY = 'secret';
 
+const mysql = require('mysql');
+const db_config = {
+    host: 'localhost',
+    user: 'root',
+    password: 'Jerico.aomine5',
+    database: 'bulldogs'
+};
+
+
+
+
 //REGISTER
-players.post('/register', (req, res) =>{
-   const playerData = {
-       username: req.body.username,
-       password: req.body.password,
-       firstName: req.body.firstName,
-       lastName: req.body.lastName,
-       jerseyNumber: req.body.jerseyNumber
-   };
+// !!! this kind of register works but its a get response and isnt in routes/Players!!!
+players.post('/register', async (req, res) => {
+    try{
+        const salt = await bcrypt.genSalt();
+        const { username, password, firstName, lastName, jerseyNumber, height, weight, isFormer, isAdmin } = req.query;
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const INSERT_PRODUCTS_QUERY =
+            `INSERT INTO players(username, password, firstName, lastName, jerseyNumber)` +
+            `VALUES('${username}', '${hashedPassword}', '${firstName}', '${lastName}', '${jerseyNumber}')`;
+        connection.query(INSERT_PRODUCTS_QUERY, (err, results) => {
+            if(err) {
+                return res.send(err);
+            }
+            else {
+                return res.send('successfully added player')
+            }
+        });
+    }catch (e) {
+        console.log(e);
+    }
+
+});
+
+const connection = mysql.createConnection(db_config);
+
+connection.connect(err => {
+    if(err) {
+        return err;
+    }
+});
+
+
+
+// !!! This register doesnt work !!!
+/*players.post('/register', async (req, res) =>{
+    const playerData = {
+        username: req.body.username,
+        password: req.body.password,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        jerseyNumber: req.body.jerseyNumber
+    };
 
    Player.findOne({
        where: {
@@ -42,10 +87,11 @@ players.post('/register', (req, res) =>{
        .catch(err => {
            res.send("Error: " + err);
        })
-});
+});*/
 
 //LOGIN
 players.post('/login', async (req, res) => {
+    console.log(req.body);
    await Player.findOne({
        where: {
            username: req.body.username

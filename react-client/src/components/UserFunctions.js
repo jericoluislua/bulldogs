@@ -2,21 +2,23 @@ import axios from 'axios';
 
 export const register = newPlayer => {
     return axios
-        .post('/register', {
+        .post('/users/register', {
             username: newPlayer.username,
             password: newPlayer.password,
             firstName: newPlayer.firstName,
             lastName: newPlayer.lastName,
             jerseyNumber: newPlayer.jerseyNumber
+        }).catch(err => {
+            console.log(err);
         })
         .then(response => {
-            console.log("Succesfully registered: " + newPlayer.username)
+            console.log("Succesfully registered: " + newPlayer.username + " " + newPlayer.password)
         });
 };
 
 export const login = player => {
     return axios
-        .post('/login', {
+        .post('/users/login', {
             username: player.username,
             password: player.password
         })
