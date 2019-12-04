@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const register = newPlayer => {
     return axios
-        .post('/users/register', {
+        .post('http://localhost:4000/players/register', {
             username: newPlayer.username,
             password: newPlayer.password,
             firstName: newPlayer.firstName,
