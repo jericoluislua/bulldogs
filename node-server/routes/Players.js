@@ -26,6 +26,7 @@ players.post('/register', async (req, res) => {
     try{
         const salt = await bcrypt.genSalt();
         const { username, password, firstName, lastName, jerseyNumber, height, weight, isFormer, isAdmin } = req.query;
+        console.log(password);
         const hashedPassword = await bcrypt.hash(password, salt);
         const INSERT_PRODUCTS_QUERY =
             `INSERT INTO players(username, password, firstName, lastName, jerseyNumber)` +

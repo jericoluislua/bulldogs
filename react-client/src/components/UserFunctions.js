@@ -8,11 +8,12 @@ export const register = newPlayer => {
             firstName: newPlayer.firstName,
             lastName: newPlayer.lastName,
             jerseyNumber: newPlayer.jerseyNumber
-        }).catch(err => {
-            console.log(err);
         })
         .then(response => {
             console.log("Succesfully registered: " + newPlayer.username + " " + newPlayer.password)
+        })
+        .catch(err => {
+            console.log(err);
         });
 };
 
@@ -24,6 +25,7 @@ export const login = player => {
         })
         .then(response => {
             localStorage.setItem('playertoken', response.data);
+            console.log(player.username);
             return response.data;
         })
         .catch(err => {
