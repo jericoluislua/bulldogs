@@ -21,42 +21,10 @@ const db_config = {
 
 
 //REGISTER
-// !!! this kind of register works but its a get response and isnt in routes/Players!!!
-players.post('/register', async (req, res) => {
-    try{
-        const salt = await bcrypt.genSalt();
-        const { username, password, firstName, lastName, jerseyNumber, height, weight, isFormer, isAdmin } = req.query;
-        console.log(password);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const INSERT_PRODUCTS_QUERY =
-            `INSERT INTO players(username, password, firstName, lastName, jerseyNumber)` +
-            `VALUES('${username}', '${hashedPassword}', '${firstName}', '${lastName}', '${jerseyNumber}')`;
-        connection.query(INSERT_PRODUCTS_QUERY, (err, results) => {
-            if(err) {
-                return res.send(err);
-            }
-            else {
-                return res.send('successfully added player')
-            }
-        });
-    }catch (e) {
-        console.log(e);
-    }
-
-});
-
-const connection = mysql.createConnection(db_config);
-
-connection.connect(err => {
-    if(err) {
-        return err;
-    }
-});
-
 
 
 // !!! This register doesnt work !!!
-/*players.post('/register', async (req, res) =>{
+players.post('/register', async (req, res) =>{
     const playerData = {
         username: req.body.username,
         password: req.body.password,
@@ -88,7 +56,7 @@ connection.connect(err => {
        .catch(err => {
            res.send("Error: " + err);
        })
-});*/
+});
 
 //LOGIN
 players.post('/login', async (req, res) => {
