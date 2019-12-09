@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { login } from '../../UserFunctions'
 import './HomePage.css';
+import {toast} from "react-toastify";
 
 class HomePage extends Component {
+
+    notify = () => toast("Wow so easy !");
 
     constructor(props){
         super(props);
@@ -33,6 +36,11 @@ class HomePage extends Component {
                 this.props.history.push('/')
             }
         })
+            .catch(err => {
+                this.setState({
+                    errors: err,
+                })
+            })
     }
 
     render() {
@@ -86,9 +94,10 @@ class HomePage extends Component {
 
 
         return (
-            <div className="container">
+            <div className="container" onLoad={this.notify}>
                 <h1 className="nBrand">BULLDOGS</h1>
                 <h3>Welcome {}!</h3>
+                {this.state && this.state.errors && this.state.errors.message && <h4>Errors: {this.state.errors.message}</h4>}
                 {localStorage.playertoken ? loggedInText : nLoggedInText}
 
                 {!localStorage.playertoken ? logInForm : null}

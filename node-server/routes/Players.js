@@ -67,15 +67,16 @@ players.post('/login', async (req, res) => {
        }
    })
        .then(player => {
-           if(bcrypt.compareSync(req.body.password, player.password)) {
+           if(player && bcrypt.compareSync(req.body.password, player.password)) {
                let playertoken = jwt.sign(player.dataValues, process.env.SECRET_KEY, { expiresIn: 1440 });
                res.json({ playertoken: playertoken });
            } else {
-               res.send("Player does not exist.");
+               res.status(401).send("Wrong user credentials.");
            }
        })
        .catch(err => {
-           res.send("Error: " + err);
+           console.error(err);
+           res.status(500).send("Something unexpected happened.");
        })
 });
 

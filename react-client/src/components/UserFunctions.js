@@ -25,7 +25,6 @@ export const login = player => {
         })
         .then(response => {
             localStorage.setItem('playertoken', response.data);
-            console.log(player.username);
             return response.data;
         })
         .catch(err => {
