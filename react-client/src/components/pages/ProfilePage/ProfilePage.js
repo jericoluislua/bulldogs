@@ -4,26 +4,34 @@ import jwt_decode from 'jwt-decode';
 
 class ProfilePage extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             username: '',
             firstName: '',
             lastName: '',
-            jerseyNumber: 0,
+            jerseyNumber: null,
+            height: null,
+            weight: null,
+            isAdmin: null,
+            isFormer: null,
             errors: {}
         };
     }
 
     componentDidMount() {
-        const token = localStorage.playertoken;
-        const decoded = jwt_decode(token);
-        this.setState({
-            username: decoded.username,
-            firstName: decoded.firstName,
-            lastName: decoded.lastName,
-            jerseyNumber: decoded.jerseyNumber
-        });
+        try{
+            const decoded = jwt_decode(window.$userToken);
+            console.log(decoded);
+            this.setState({
+                username: decoded.username,
+                firstName: decoded.firstName,
+                lastName: decoded.lastName,
+                jerseyNumber: decoded.jerseyNumber
+            });
+        }catch (e) {
+            console.log(e);
+        }
     }
 
     render() {
@@ -31,6 +39,7 @@ class ProfilePage extends Component {
             <div className="container">
                 {/*to be added: instead of "Player" it will be the player's first name*/}
                 <h1>Profile {this.state.username}</h1>
+                <p>{this.state.firstName}</p>
 
             </div>
         );

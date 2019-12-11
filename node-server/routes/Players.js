@@ -9,21 +9,7 @@ players.use(cors());
 
 process.env.SECRET_KEY = 'secret';
 
-const mysql = require('mysql');
-const db_config = {
-    host: 'localhost',
-    user: 'root',
-    password: 'Jerico.aomine5',
-    database: 'bulldogs'
-};
-
-
-
-
 //REGISTER
-
-
-// !!! This register doesnt work !!!
 players.post('/register', async (req, res) =>{
     const playerData = {
         username: req.body.username,

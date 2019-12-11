@@ -17,9 +17,7 @@ class Navbar extends Component{
         const nLoggedIn = (
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                    <li>
-                        <NavLink className="nav-link text-uppercase" to="/register">Register</NavLink>
-                    </li>
+
                 </ul>
             </div>
         );
@@ -35,6 +33,9 @@ class Navbar extends Component{
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link text-uppercase" to="weight-difference">Weight difference</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link text-uppercase" to="/register">Register</NavLink>
                     </li>
                     <li className="nav-item">
                         <a href="/" className="nav-link text-uppercase" onClick={this.logOut.bind(this)}>Logout</a>
