@@ -25,7 +25,7 @@ export const login = player => {
         })
         .then(response => {
             localStorage.setItem('playertoken', response.data);
-            window.$userToken = response.data;
+            window.$playerToken = response.data;
             return response.data;
         })
         .catch(err => {
@@ -34,7 +34,11 @@ export const login = player => {
         });
 };
 
+export function loadUserData(){
+
+}
+
 export const updateUser = updateData => {
     return axios
         .post
-}
+};
