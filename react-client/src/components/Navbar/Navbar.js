@@ -9,6 +9,7 @@ class Navbar extends Component{
     logOut(e){
         e.preventDefault();
         localStorage.removeItem('playertoken');
+        localStorage.removeItem('username');
         this.props.history.push('/');
     }
 

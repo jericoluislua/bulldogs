@@ -14,10 +14,10 @@ class ProfilePage extends Component {
             firstName: '',
             lastName: '',
             jerseyNumber: null,
-            height: null,
-            weight: null,
-            isAdmin: null,
-            isFormer: null,
+            height: 0,
+            weight: 0,
+            isAdmin: 0,
+            isFormer: 0,
             errors: {}
         };
     }
@@ -27,17 +27,31 @@ class ProfilePage extends Component {
             .get('http://localhost:4000/players', {})
             .then(response => {
                 const data = response.data.data;
-                let answer = "no";
                 console.log(data);
                 const players = data.map(p =>
                     <div>
                         {
-                            localStorage.username === p.username ? answer = "yes" : console.log("no")
+                            localStorage.username === p.username ? console.log("yes") : console.log("no")
                         }
-                        <p>{p.p_id}</p>
-                        <p>{p.username}</p>
-                        <p>{p.firstName}</p>
-                        <p>{p.lastName}</p>
+                        <p className="m-0">
+                            {localStorage.username === p.username ? "Name: " + p.firstName + " " : null}
+                            {localStorage.username === p.username ? p.lastName : null}
+                        </p>
+                        <p className="m-0">
+                            {localStorage.username === p.username ? "Jersey Number: " + p.jerseyNumber : null}
+                        </p>
+                        <p className="m-0">
+                            {localStorage.username === p.username ? p.height <= 0 ? null : "Height: " + p.height + "cm" : null}
+                        </p>
+                        <p className="m-0">
+                            {localStorage.username === p.username ? p.weight <= 0 ? null : "Weight: " + p.weight + "kg" : null}
+                        </p>
+                        <p className="m-0">
+                            {localStorage.username === p.username ? p.isAdmin === 1 ? "Admin: Yes" : "Admin: No" : null}
+                        </p>
+                        <p className="m-0">
+                            {localStorage.username === p.username ? p.isFormer === 1 ? "Former Player: Yes" : "Former Player: No" : null}
+                        </p>
                     </div>
                 );
                 this.setState({players})

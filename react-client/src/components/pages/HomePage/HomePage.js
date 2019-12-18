@@ -97,7 +97,7 @@ class HomePage extends Component {
         return (
             <div className="container" onLoad={this.notify}>
                 <h1 className="nBrand">BULLDOGS</h1>
-                <h3>Welcome {this.state.username}!</h3>
+                <h3>Welcome {localStorage.playertoken ? localStorage.username : null}!</h3>
                 {this.state && this.state.errors && this.state.errors.message && <h4>Errors: {this.state.errors.message}</h4>}
                 {localStorage.playertoken ? loggedInText : nLoggedInText}
 
