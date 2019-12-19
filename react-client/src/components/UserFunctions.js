@@ -34,8 +34,14 @@ export const login = player => {
         });
 };
 
-export function loadUserData(){
+export const deletePlayer = player => {
+    return axios
+        .post()
+}
 
+export const loadPlayerData = user => {
+    return axios
+        .get('http://localhost:4000/players', {})
 }
 
 export const updateUser = updateData => {

@@ -66,6 +66,15 @@ players.post('/login', async (req, res) => {
        })
 });
 
+players.post('/delete', async (req, res) => {
+    console.log(req.body);
+    await Playder.findOne({
+        where: {
+            username: req.body.username
+        }
+    })
+})
+
 players.get('/profile', (req, res) => {
    var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY);
 

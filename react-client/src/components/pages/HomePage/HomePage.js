@@ -32,6 +32,7 @@ class HomePage extends Component {
         };
 
         login(player).then(res => {
+
             if (res) {
                 this.props.history.push('/');
                 localStorage.setItem('username', this.state.username);
@@ -97,7 +98,7 @@ class HomePage extends Component {
         return (
             <div className="container" onLoad={this.notify}>
                 <h1 className="nBrand">BULLDOGS</h1>
-                <h3>Welcome {localStorage.playertoken ? localStorage.username : null}!</h3>
+                <h3>Welcome {localStorage.playertoken ? this.props.username : null}!</h3>
                 {this.state && this.state.errors && this.state.errors.message && <h4>Errors: {this.state.errors.message}</h4>}
                 {localStorage.playertoken ? loggedInText : nLoggedInText}
 
