@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {loadPlayerData} from "../../UserFunctions";
+import './PlayersPage.css';
 
-
-class ProfilePage extends Component {
+class PlayersPage extends Component {
 
     constructor(props){
         super(props);
@@ -35,33 +35,15 @@ class ProfilePage extends Component {
             this.setState({players: response.data.data});
         })
             .catch(err => console.log(err));
-    };
-
-
+    }
 
     render() {
-        const profilecard = (
-            <div className="col-5 m-auto">
-                <div className="card mt-5 mb-5">
-                    <div className="card-header">{this.state.username}</div>
-                    <div className="card-body">
-                        <p><i className="font-weight-bold">Name: </i>{this.state.firstName + " " + this.state.lastName}</p>
-                        <p><i className="font-weight-bold">Jersey Number: </i>{this.state.jerseyNumber}</p>
-                        <p><i className="font-weight-bold">Height: </i>{this.state.height}cm</p>
-                        <p><i className="font-weight-bold">Weight: </i>{this.state.weight}kg</p>
-                    </div>
-                    <div className="card-footer">buttons</div>
-                </div>
-            </div>
-        );
-
         return <div className="container">
             {console.log(this.state.players)}
-            <h1 className="mt-1">Profile</h1>
+            <h1>Players</h1>
             {this.state.players.map(p =>
-                localStorage.username === p.username ?
                 <div className="col-lg-5 m-auto">
-                    <div className="card card-bulldogs mt-5 mb-5">
+                    <div className="card-bulldogs card mt-5 mb-5">
                         <div className="card-header">{p.username}</div>
                         <div className="card-body">
                             <p><i className="font-weight-bold">Name: </i>{p.firstName + " " + p.lastName}</p>
@@ -69,11 +51,16 @@ class ProfilePage extends Component {
                             <p><i className="font-weight-bold">Height: </i>{p.height}cm</p>
                             <p><i className="font-weight-bold">Weight: </i>{p.weight}kg</p>
                         </div>
+                        <div className="card-footer">
+                            <button className="btn-bulldogs btn">hi</button>
+                            <button className="btn-bulldogs btn">hello</button>
+                        </div>
                     </div>
-                </div>: null)}
-        </div>
+                </div>
+            )}
 
+        </div>
     }
 }
 
-export default ProfilePage;
+export default PlayersPage;

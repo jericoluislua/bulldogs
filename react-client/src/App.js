@@ -14,6 +14,7 @@ import WeightDifferencePage from "./components/pages/WeightDifferencePage/Weight
 import ProfilePage from "./components/pages/ProfilePage/ProfilePage";
 import NotFoundPage from "./components/NotFoundPage";
 import RegistrationPage from "./components/pages/RegistrationPage/RegistrationPage";
+import PlayersPage from "./components/pages/PlayersPage/PlayersPage";
 
 export default class App extends Component{
 
@@ -43,6 +44,7 @@ export default class App extends Component{
                     <Route path="/height-difference" component={HeightDifferencePage}/>
                     <Route path="/weight-difference" component={WeightDifferencePage}/>
                     <Route path="/profile" component={ProfilePage}/>
+                    <Route path="/players" component={PlayersPage}/>
                     <Route path="/register" component={RegistrationPage}/>
                     <Route component={NotFoundPage}/>
                 </Switch>

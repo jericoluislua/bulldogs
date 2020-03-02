@@ -66,13 +66,24 @@ players.post('/login', async (req, res) => {
        })
 });
 
-players.post('/delete', async (req, res) => {
+players.get('/delete', async (req, res) => {
+    const playerData = {
+        username: req.body.username,
+        password: req.body.password,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        jerseyNumber: req.body.jerseyNumber
+    };
+
     console.log(req.body);
-    await Playder.findOne({
+    await Player.findOne({
         where: {
             username: req.body.username
         }
     })
+        .then(player => {
+            Player.delete(playerData)
+        })
 })
 
 players.get('/profile', (req, res) => {

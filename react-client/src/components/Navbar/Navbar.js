@@ -39,6 +39,9 @@ class Navbar extends Component{
                         <NavLink className="nav-link text-uppercase" to="/register">Register</NavLink>
                     </li>
                     <li className="nav-item">
+                        <NavLink className="nav-link text-uppercase" to="/players">Players</NavLink>
+                    </li>
+                    <li className="nav-item">
                         <a href="/" className="nav-link text-uppercase" onClick={this.logOut.bind(this)}>Logout</a>
                     </li>
                 </ul>

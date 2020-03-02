@@ -1,0 +1,7 @@
+.card-bulldogs{
+    border-color: #b21c0b;
+}
+
+.card-bulldogs > .card-header{
+    background-color: #e86556;
+}
