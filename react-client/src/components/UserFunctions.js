@@ -24,8 +24,8 @@ export const login = player => {
             password: player.password
         })
         .then(response => {
-            localStorage.setItem('playertoken', response.data.data);
-            window.$playerToken = response.data;
+            localStorage.setItem('playertoken', response.data["playertoken"]);
+            localStorage.setItem('id', response.data["id"]);
             return response.data;
 
         })
@@ -35,14 +35,30 @@ export const login = player => {
         });
 };
 
+
 export const deletePlayer = player => {
     return axios
         .delete('http://localhost:4000/player/delete', {})
 };
 
-export const loadPlayerData = user => {
+export const loadAllPlayerData = player => {
     return axios
         .get('http://localhost:4000/players/', {})
+};
+
+export const loadPlayerData = id => {
+    return axios
+        .get('http://localhost:4000/players/', {
+            params:{
+                p_id: id
+            }
+        })
+        .then(response => {
+            console.log("Successfully loaded " + id + "\'s profile.");
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 export const updateUser = updateData => {

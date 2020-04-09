@@ -55,7 +55,8 @@ players.post('/login', async (req, res) => {
        .then(player => {
            if(player && bcrypt.compareSync(req.body.password, player.password)) {
                let playertoken = jwt.sign(player.dataValues, process.env.SECRET_KEY, { expiresIn: 1440 });
-               res.json({ playertoken: playertoken });
+               res.json({ playertoken: playertoken,
+                            id: player.dataValues.p_id});
            } else {
                res.status(401).send("Wrong user credentials.");
            }

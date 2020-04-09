@@ -10,7 +10,6 @@ class HomePage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            p_id: 0,
             username: '',
             password: '',
             errors: {}
@@ -28,16 +27,15 @@ class HomePage extends Component {
         e.preventDefault();
 
         const player = {
-            p_id: this.state.p_id,
             username: this.state.username,
             password: this.state.password
+
         };
 
         login(player).then(res => {
 
             if (res) {
                 this.props.history.push('/');
-                localStorage.setItem('p_id', this.state.p_id);
                 localStorage.setItem('username', this.state.username);
                 localStorage.setItem('password', this.state.password);
             }

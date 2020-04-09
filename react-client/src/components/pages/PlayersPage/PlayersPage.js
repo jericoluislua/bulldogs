@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {loadPlayerData, deletePlayer, login} from "../../UserFunctions";
+import {loadAllPlayerData, deletePlayer} from "../../UserFunctions";
 import './PlayersPage.css';
 
 class PlayersPage extends Component {
@@ -48,7 +48,7 @@ class PlayersPage extends Component {
             lastName: decoded.lastName,
             jerseyNumber: decoded.jerseyNumber
         });*/
-        loadPlayerData().then(response => {
+        loadAllPlayerData().then(response => {
             this.setState({players: response.data.data});
             console.log(response.data.data)
         })

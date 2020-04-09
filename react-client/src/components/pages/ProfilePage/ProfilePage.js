@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
-import {loadPlayerData, register, updateUser} from "../../UserFunctions";
-
+import {loadPlayerData, updateUser} from "../../UserFunctions";
+import jwt_decode from 'jwt-decode';
 
 class ProfilePage extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            p_id: 0,
-            username: localStorage.username,
+            username: '',
             firstName: '',
             lastName: '',
             newPassword: '',
-            password: localStorage.password,
+            password: '',
             jerseyNumber: null,
             height: null,
             weight: null,
@@ -31,19 +30,24 @@ class ProfilePage extends Component {
     }
     componentDidMount() {
         /*const decoded = jwt_decode(window.$userToken);
-        console.log(decoded);
-        this.setState({
-            username: decoded.username,
-            firstName: decoded.firstName,
-            lastName: decoded.lastName,
-            jerseyNumber: decoded.jerseyNumber
-        });*/
-        loadPlayerData().then(response => {
-            this.setState({players: response.data.data})
-        })
-            .catch(err => console.log(err));
-    };
 
+        });*/
+        loadPlayerData(localStorage.id)
+            .then(response => {
+                const decoded = jwt_decode(localStorage.playertoken);
+                this.setState({
+                    username: decoded.username,
+                    firstName: decoded.firstName,
+                    lastName: decoded.lastName,
+                    jerseyNumber: decoded.jerseyNumber,
+                    height: decoded.height,
+                    weight: decoded.weight,
+                    isFormer: decoded.isFormer,
+                    isAdmin: decoded.isAdmin
+                })})
+                .catch(err => console.log(err));
+
+    }
 
     onSubmit(e) {
         e.preventDefault();
@@ -70,34 +74,6 @@ class ProfilePage extends Component {
         return <div className="container">
             {console.log(this.state.players)}
             <h1 className="mt-1">Profile</h1>
-            {this.setState(state => ({
-                 players: state.players.map(p => {
-                        if(localStorage.username === p.username){
-                            state.p_id = p.p_id;
-                            state.username = p.username;
-                            state.password = p.password;
-                            state.firstName = p.firstName;
-                            state.lastName = p.lastName;
-                            state.jerseyNumber = p.jerseyNumber;
-                            state.height = p.height;
-                            state.weight = p.weight;
-                            state.isFormer = p.isFormer;
-                            state.isAdmin = p.isAdmin;
-                        }
-
-                    })}))}
-
-                        {/*p_id:p.p_id,
-                        username: p.username,
-                        password: p.password,
-                        firstName: p.firstName,
-                        lastName: p.lastName,
-                        jerseyNumber: p.jerseyNumber,
-                        height: p.height,
-                        weight: p.weight,
-                        isFormer: p.isFormer,
-                        isAdmin: p.isAdmin*/}
-
             <div className="col-lg-5 m-auto">
             <div className="card card-bulldogs mt-5 mb-5">
                 <div className="card-header">{this.state.username}</div>
@@ -189,7 +165,7 @@ class ProfilePage extends Component {
                 </div>
             </div>
         </div>
-            {console.log("Fullname " + this.state.firstName + " " + this.state.lastName)}
+
         </div>
 
     }
