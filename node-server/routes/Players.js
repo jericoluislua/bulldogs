@@ -46,8 +46,8 @@ players.post('/register', async (req, res) =>{
 
 //LOGIN
 players.post('/login', async (req, res) => {
-    console.log(req.body);
-   await Player.findOne({
+    console.log("req body   " + req.body);
+    await Player.findOne({
        where: {
            username: req.body.username
        }
@@ -63,11 +63,50 @@ players.post('/login', async (req, res) => {
        .catch(err => {
            console.error(err);
            res.status(500).send("Something unexpected happened.");
-       })
+       });
+    console.log("req query " + req.query.p_id);
 });
 
-players.get('/delete', async (req, res) => {
+/*players.get('/profile', async (req, res) => {
+    await Player.findAll({
+    where: {
+        username: req.params.p_id
+    }
+    })
+        .then(
+            SELECT_SPECIFIC_BPLAYER_QUERY = 'SELECT * FROM players WHERE p_id='+testid
+        )
+}*/
+
+players.get('profile/:p_id', async (req, res) => {
+   await Player.findPk({
+
+       p_id: req.params.p_id
+   })
+       .then
+});
+
+players.get('/:p_id', async (req, res) => {
+    await Player.findOne({
+        where: {
+            p_id: req.params.p_id
+        }
+    })
+        .then(player => {
+            if(player) {
+                res.json(player)
+            } else {
+                res.send('Player does not exist.');
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).send("Something unexpected happened.");
+        });
+});
+players.get('/delete/:p_id', async (req, res) => {
     const playerData = {
+        p_id: req.params.p_id,
         username: req.body.username,
         password: req.body.password,
         firstName: req.body.firstName,
@@ -75,34 +114,12 @@ players.get('/delete', async (req, res) => {
         jerseyNumber: req.body.jerseyNumber
     };
 
-    console.log(req.body);
-    await Player.findOne({
-        where: {
-            username: req.body.username
+    Player.remove(playerData, async(err) =>{
+        if(err){
+            console.log(err);
         }
+        res.send("Success");
     })
-        .then(player => {
-            Player.delete(playerData)
-        })
-})
-
-players.get('/profile', (req, res) => {
-   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY);
-
-   Player.findOne({
-       where: {
-           id: decoded.id
-       }
-   })
-       .then(player => {
-           if(player) {
-               res.json(player)
-           } else {
-               res.send('Player does not exist.');
-           }
-       })
-       .catch(err => {
-           res.send('Error: ' + err);
-       });
 });
+
 module.exports = players;

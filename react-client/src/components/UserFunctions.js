@@ -10,7 +10,7 @@ export const register = newPlayer => {
             jerseyNumber: newPlayer.jerseyNumber
         })
         .then(response => {
-            console.log("Succesfully registered: " + newPlayer.username + " " + newPlayer.password);
+            console.log("Successfully registered: " + newPlayer.username + " " + newPlayer.password);
         })
         .catch(err => {
             console.log(err);
@@ -24,9 +24,10 @@ export const login = player => {
             password: player.password
         })
         .then(response => {
-            localStorage.setItem('playertoken', response.data);
+            localStorage.setItem('playertoken', response.data.data);
             window.$playerToken = response.data;
             return response.data;
+
         })
         .catch(err => {
             console.log(err);
@@ -36,15 +37,15 @@ export const login = player => {
 
 export const deletePlayer = player => {
     return axios
-        .post()
-}
+        .delete('http://localhost:4000/player/delete', {})
+};
 
 export const loadPlayerData = user => {
     return axios
-        .get('http://localhost:4000/players', {})
-}
+        .get('http://localhost:4000/players/', {})
+};
 
 export const updateUser = updateData => {
     return axios
-        .post
+        .put('http://localhost:4000/players/update/')
 };

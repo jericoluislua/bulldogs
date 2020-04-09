@@ -10,6 +10,7 @@ class HomePage extends Component {
     constructor(props){
         super(props);
         this.state = {
+            p_id: 0,
             username: '',
             password: '',
             errors: {}
@@ -27,6 +28,7 @@ class HomePage extends Component {
         e.preventDefault();
 
         const player = {
+            p_id: this.state.p_id,
             username: this.state.username,
             password: this.state.password
         };
@@ -35,7 +37,9 @@ class HomePage extends Component {
 
             if (res) {
                 this.props.history.push('/');
+                localStorage.setItem('p_id', this.state.p_id);
                 localStorage.setItem('username', this.state.username);
+                localStorage.setItem('password', this.state.password);
             }
         })
             .catch(err => {
@@ -60,7 +64,7 @@ class HomePage extends Component {
 
         const logInForm = (
             <div className="row d-flex justify-content-center">
-                <div className="col-lg-3 rounded border">
+                <div className="col-lg-3 col-md-5 rounded border">
                     <form onSubmit={this.onSubmit} className="m-3">
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
@@ -98,8 +102,9 @@ class HomePage extends Component {
         return (
             <div className="container" onLoad={this.notify}>
                 <h1 className="nBrand">BULLDOGS</h1>
-                <h3>Welcome {localStorage.playertoken ? this.props.username : null}!</h3>
-                {this.state && this.state.errors && this.state.errors.message && <h4>Errors: {this.state.errors.message}</h4>}
+                <h3>Welcome {localStorage.playertoken ? localStorage.username : null}!</h3>
+                {console.log(localStorage.password)}
+                {this.state && this.state.errors && this.state.errors.message && <h4>Errors: Wrong credentials</h4>}
                 {localStorage.playertoken ? loggedInText : nLoggedInText}
 
                 {!localStorage.playertoken ? logInForm : null}

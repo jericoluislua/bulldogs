@@ -15,6 +15,7 @@ const db_config = {
 
 const SELECT_ALL_BPLAYERS_QUERY = 'SELECT * FROM players';
 
+
 app.use(cors());
 app.use(
     bodyParser.urlencoded({extended: false})
@@ -46,6 +47,22 @@ app.get('/players', (req, res) => {
    });
 });
 
+//: gives you certain database params
+/*app.get('/player/:p_id', (req, res) => {
+   connection.query(`SELECT * FROM players WHERE p_id=${req.params.p_id}`, (err, result) =>{
+      if(err) {
+         return res.send(err);
+      }
+      else {
+         return res.json({
+            data:result
+
+         });
+
+      }
+
+   });
+});*/
 const connection = mysql.createConnection(db_config);
 
 connection.connect(err => {
