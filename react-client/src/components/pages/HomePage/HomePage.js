@@ -37,7 +37,6 @@ class HomePage extends Component {
             if (res) {
                 this.props.history.push('/');
                 localStorage.setItem('username', this.state.username);
-                localStorage.setItem('password', this.state.password);
             }
         })
             .catch(err => {

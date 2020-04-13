@@ -26,6 +26,10 @@ export const login = player => {
         .then(response => {
             localStorage.setItem('playertoken', response.data["playertoken"]);
             localStorage.setItem('id', response.data["id"]);
+            localStorage.setItem('isAdmin', response.data["isAdmin"]);
+            if (localStorage.isAdmin === 1){
+
+            }
             return response.data;
 
         })
@@ -54,7 +58,7 @@ export const loadPlayerData = id => {
             }
         })
         .then(response => {
-            console.log("Successfully loaded " + id + "\'s profile.");
+            console.log("Successfully loaded " + id + "'s profile.");
         })
         .catch(err => {
             console.log(err);
@@ -63,5 +67,8 @@ export const loadPlayerData = id => {
 
 export const updateUser = updateData => {
     return axios
-        .put('http://localhost:4000/players/update/')
+        .put('http://localhost:4000/players/update/', {
+            params:{
+            }
+        })
 };

@@ -55,6 +55,7 @@ class ProfilePage extends Component {
         const newPlayer = {
             username: this.state.username,
             password: this.state.password,
+            newPassword: this.state.newPassword,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             jerseyNumber: this.state.jerseyNumber,
@@ -72,7 +73,6 @@ class ProfilePage extends Component {
     render() {
 
         return <div className="container">
-            {console.log(this.state.players)}
             <h1 className="mt-1">Profile</h1>
             <div className="col-lg-5 m-auto">
             <div className="card card-bulldogs mt-5 mb-5">
@@ -158,8 +158,29 @@ class ProfilePage extends Component {
                                 required
                             />
                         </div>
+                        <div className="form-group">
+                            <label htmlFor="isFormer">Former</label>
+                            <input
+                                className="form-control"
+                                name="isFormer"
+                                type="checkbox"
+                                value={this.state.isFormer}
+                                onChange={this.onChange}
+                                required
+                            />
+                            <label htmlFor="isAdmin">Admin</label>
+                            <input
+                                className="form-control"
+                                name="isAdmin"
+                                type="checkbox"
+                                value={this.state.isFormer}
+                                onChange={this.onChange}
+                                required
+                            />
 
-                        <button type="submit" className="btn btn-bulldogs">Update</button>
+                        </div>
+
+                        <button type="submit" className="btn btn-bulldogs" >Update</button>
 
                     </form>
                 </div>

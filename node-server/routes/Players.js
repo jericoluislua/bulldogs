@@ -56,7 +56,8 @@ players.post('/login', async (req, res) => {
            if(player && bcrypt.compareSync(req.body.password, player.password)) {
                let playertoken = jwt.sign(player.dataValues, process.env.SECRET_KEY, { expiresIn: 1440 });
                res.json({ playertoken: playertoken,
-                            id: player.dataValues.p_id});
+                            id: player.dataValues.p_id,
+                            isAdmin: player.dataValues.isAdmin});
            } else {
                res.status(401).send("Wrong user credentials.");
            }
@@ -68,25 +69,7 @@ players.post('/login', async (req, res) => {
     console.log("req query " + req.query.p_id);
 });
 
-/*players.get('/profile', async (req, res) => {
-    await Player.findAll({
-    where: {
-        username: req.params.p_id
-    }
-    })
-        .then(
-            SELECT_SPECIFIC_BPLAYER_QUERY = 'SELECT * FROM players WHERE p_id='+testid
-        )
-}*/
-
-players.get('profile/:p_id', async (req, res) => {
-   await Player.findPk({
-
-       p_id: req.params.p_id
-   })
-       .then
-});
-
+//PROFILE
 players.get('/:p_id', async (req, res) => {
     await Player.findOne({
         where: {
@@ -105,22 +88,40 @@ players.get('/:p_id', async (req, res) => {
             res.status(500).send("Something unexpected happened.");
         });
 });
-players.get('/delete/:p_id', async (req, res) => {
-    const playerData = {
-        p_id: req.params.p_id,
-        username: req.body.username,
-        password: req.body.password,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        jerseyNumber: req.body.jerseyNumber
-    };
 
-    Player.remove(playerData, async(err) =>{
-        if(err){
-            console.log(err);
+players.post('/update/:p_id', async (req, res) => {
+   const playerData = {
+       username: req.body.username,
+       password: req.body.newPassword,
+       firstName: req.body.firstName,
+       lastName: req.body.lastName,
+       jerseyNumber: req.body.jerseyNumber,
+       height: req.body.height,
+       weight: req.body.weight,
+       isFormer: req.body.isFormer,
+       isAdmin: req.body.isAdmin
+   };
+
+   Player.update({playerData}, {
+       where:{
+           p_id: req.params.p_id
+       }
+   })
+});
+
+players.delete('/delete/:p_id', async (req, res) => {
+
+    await Player.destroy({
+        where:{
+            p_id: req.params.p_id
         }
-        res.send("Success");
-    })
+    },{truncate: true})
+        .then(() => {
+            res.json({status: 'Player removed!'})
+        })
+        .catch(err => {
+            res.json('Error: ' + err)
+        })
 });
 
 module.exports = players;

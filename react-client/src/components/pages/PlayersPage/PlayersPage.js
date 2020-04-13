@@ -57,6 +57,16 @@ class PlayersPage extends Component {
 
 
     render() {
+        const boolAdmin = (localStorage.isAdmin === "1");
+        const isAdmin = (
+            <div className="card-footer">
+                <button className="btn-bulldogs btn">hi</button>
+                <form onSubmit={this.onSubmit}>
+                    {<button className="btn-bulldogs btn">delete</button>}
+                </form>
+            </div>
+        );
+
         return <div className="container">
             <h1>Players</h1>
             {this.state.players.map((p) =>
@@ -70,12 +80,10 @@ class PlayersPage extends Component {
                             <p><i className="font-weight-bold">Height: </i>{p.height}cm</p>
                             <p><i className="font-weight-bold">Weight: </i>{p.weight}kg</p>
                         </div>
-                        <div className="card-footer">
-                            <button className="btn-bulldogs btn">hi</button>
-                            <form onSubmit={this.onSubmit}>
-                                {<button className="btn-bulldogs btn" onClick={deletePlayer(p.p_id)}>delete</button>}
-                            </form>
-                        </div>
+
+
+                        {boolAdmin ? isAdmin : null}
+
                     </div>
                 </div>
             )}
