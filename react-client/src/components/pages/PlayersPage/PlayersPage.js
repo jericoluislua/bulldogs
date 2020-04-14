@@ -67,8 +67,19 @@ class PlayersPage extends Component {
 
 
     render() {
-        const boolAdmin = (localStorage.isAdmin === "0");
+        const boolAdmin = (localStorage.isAdmin === "1");
         let chosen_p_id = 0;
+        const isAdmin = (p) => {
+            return (
+            <div className="card-footer">
+
+
+
+                <button className="btn-bulldogs btn">hi</button>
+                <button className="btn-bulldogs btn" onClick={e => this.handleDelete(e, p.p_id)}>delete</button>
+
+            </div>)
+        };
 
         return <div className="container">
             <h1>Players</h1>
@@ -83,8 +94,8 @@ class PlayersPage extends Component {
                             <p><i className="font-weight-bold">Height: </i>{p.height}cm</p>
                             <p><i className="font-weight-bold">Weight: </i>{p.weight}kg</p>
                         </div>
-
-                        <div className="card-footer">
+                        {boolAdmin ? isAdmin(p) : null}
+                        {/*<div className="card-footer">
 
 
 
@@ -92,7 +103,7 @@ class PlayersPage extends Component {
                             <button className="btn-bulldogs btn"
                                     disabled={boolAdmin} onClick={e => this.handleDelete(e, p.p_id)}>delete</button>
 
-                        </div>
+                        </div>*/}
                         {/*{boolAdmin ? this.setState(chosen_p_id=p.p_id) : null}*/}
 
                     </div>
