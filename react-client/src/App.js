@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "./components/Navbar/Navbar";
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 //React Router Import
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 //Import Pages
 import HomePage from "./components/pages/HomePage/HomePage";
@@ -15,6 +16,15 @@ import ProfilePage from "./components/pages/ProfilePage/ProfilePage";
 import NotFoundPage from "./components/NotFoundPage";
 import RegistrationPage from "./components/pages/RegistrationPage/RegistrationPage";
 import PlayersPage from "./components/pages/PlayersPage/PlayersPage";
+
+const PrivateRoute = ({component: Component, ...rest}) => (
+    <Route {...rest}
+           render={(props) => (
+               localStorage.playertoken
+                   ? <Component{...props} />
+                   : <Redirect to='/' />
+           )} />
+);
 
 export default class App extends Component{
 
@@ -26,12 +36,12 @@ export default class App extends Component{
         }
     }
 
-
     render() {
 
         return(
             <div className="App">
                 <Navbar/>
+                <ToastContainer/>
                 <Switch>
                     {/*exact makes homepage the default*/}
                     <Route
@@ -41,11 +51,11 @@ export default class App extends Component{
                             <HomePage {...props}/>
                             )}
                     />
-                    <Route path="/height-difference" component={HeightDifferencePage}/>
-                    <Route path="/weight-difference" component={WeightDifferencePage}/>
-                    <Route path="/profile" component={ProfilePage}/>
-                    <Route path="/players" component={PlayersPage}/>
-                    <Route path="/register" component={RegistrationPage}/>
+                    <PrivateRoute path="/height-difference" component={HeightDifferencePage}/>
+                    <PrivateRoute path="/weight-difference" component={WeightDifferencePage}/>
+                    <PrivateRoute path="/profile" component={ProfilePage}/>
+                    <PrivateRoute path="/players" component={PlayersPage}/>
+                    <PrivateRoute path="/register" component={RegistrationPage}/>
                     <Route component={NotFoundPage}/>
                 </Switch>
             </div>

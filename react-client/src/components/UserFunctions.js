@@ -26,6 +26,7 @@ export const login = player => {
         .then(response => {
             localStorage.setItem('playertoken', response.data["playertoken"]);
             localStorage.setItem('id', response.data["id"]);
+            localStorage.setItem('username', response.data["username"]);
             localStorage.setItem('isAdmin', response.data["isAdmin"]);
             if (localStorage.isAdmin === 1){
 
@@ -42,7 +43,13 @@ export const login = player => {
 
 export const deletePlayer = player => {
     return axios
-        .delete('http://localhost:4000/player/delete', {})
+        .delete(`http://localhost:4000/players/delete/${player}`)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.log(err);
+        })
 };
 
 export const loadAllPlayerData = player => {

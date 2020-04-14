@@ -25,19 +25,29 @@ class PlayersPage extends Component {
         e.preventDefault();
 
         const player = {
-            username: this.state.username,
-            password: this.state.password
+           p_id: this.state.p_id
         };
 
-        deletePlayer(player).then(res => {
+        console.log("chosen id is: " + player);
+
+        /*deletePlayer(player).then(res => {
 
             if (res) {
                 this.props.history.push('/');
                 console.log("Successfully deleted user: " + this.state.username)
             }
-        })
+        })*/
     }
 
+    handleDelete(e, p_id){
+        deletePlayer(p_id).then(res => {
+
+            if (res) {
+                console.log("Successfully deleted user: " + this.state.username)
+                this.props.history.push('/players');
+            }
+        })
+    }
 
     componentDidMount() {
         /*const decoded = jwt_decode(window.$userToken);
@@ -57,32 +67,33 @@ class PlayersPage extends Component {
 
 
     render() {
-        const boolAdmin = (localStorage.isAdmin === "1");
-        const isAdmin = (
-            <div className="card-footer">
-                <button className="btn-bulldogs btn">hi</button>
-                <form onSubmit={this.onSubmit}>
-                    {<button className="btn-bulldogs btn">delete</button>}
-                </form>
-            </div>
-        );
+        const boolAdmin = (localStorage.isAdmin === "0");
+        let chosen_p_id = 0;
 
         return <div className="container">
             <h1>Players</h1>
-            {this.state.players.map((p) =>
-                <div className="col-lg-5 m-auto">
-                    <div className="card-bulldogs card mt-5 mb-5">
+            {this.state.players.map((p, id) =>
+                <div className="col-lg-5 m-auto" key={id}>
+                    <div className="card-bulldogs card mt-5 mb-5" key={id}>
                         <div className="card-header">{p.username}</div>
                         <div className="card-body">
-                            {console.log("ID: " + p.p_id + "\nUsername: " + p.username)}
+
                             <p><i className="font-weight-bold">Name: </i>{p.firstName + " " + p.lastName}</p>
                             <p><i className="font-weight-bold">Jersey Number: </i>{p.jerseyNumber}</p>
                             <p><i className="font-weight-bold">Height: </i>{p.height}cm</p>
                             <p><i className="font-weight-bold">Weight: </i>{p.weight}kg</p>
                         </div>
 
+                        <div className="card-footer">
 
-                        {boolAdmin ? isAdmin : null}
+
+
+                            <button className="btn-bulldogs btn" disabled={boolAdmin}>hi</button>
+                            <button className="btn-bulldogs btn"
+                                    disabled={boolAdmin} onClick={e => this.handleDelete(e, p.p_id)}>delete</button>
+
+                        </div>
+                        {/*{boolAdmin ? this.setState(chosen_p_id=p.p_id) : null}*/}
 
                     </div>
                 </div>

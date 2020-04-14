@@ -56,6 +56,7 @@ players.post('/login', async (req, res) => {
            if(player && bcrypt.compareSync(req.body.password, player.password)) {
                let playertoken = jwt.sign(player.dataValues, process.env.SECRET_KEY, { expiresIn: 1440 });
                res.json({ playertoken: playertoken,
+                            username: player.dataValues.username,
                             id: player.dataValues.p_id,
                             isAdmin: player.dataValues.isAdmin});
            } else {
@@ -71,6 +72,7 @@ players.post('/login', async (req, res) => {
 
 //PROFILE
 players.get('/:p_id', async (req, res) => {
+    debugger;
     await Player.findOne({
         where: {
             p_id: req.params.p_id
@@ -117,10 +119,12 @@ players.delete('/delete/:p_id', async (req, res) => {
         }
     },{truncate: true})
         .then(() => {
-            res.json({status: 'Player removed!'})
+            res.json({status: 'Player ' + req.params.p_id + ' removed.' })
         })
         .catch(err => {
-            res.json('Error: ' + err)
+            res.json('Error: ' + err);
+            res.status(500).send("Something unexpected happened.");
+
         })
 });
 

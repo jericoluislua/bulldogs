@@ -2,14 +2,20 @@
 import './Navbar.css';
 import React, { Component } from 'react';
 import {Link, NavLink, withRouter} from "react-router-dom";
-
+import {toast} from "react-toastify";
 
 class Navbar extends Component{
+    logoutSucc = () => toast.success('Logged out successfully.',
+        {
+            position: toast.POSITION.BOTTOM_LEFT
+        });
 
     logOut(e){
         e.preventDefault();
         localStorage.removeItem('playertoken');
         localStorage.removeItem('username');
+        localStorage.removeItem('password');
+        this.logoutSucc();
         this.props.history.push('/');
     }
 

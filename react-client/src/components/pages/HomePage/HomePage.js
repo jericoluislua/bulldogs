@@ -5,7 +5,14 @@ import {toast} from "react-toastify";
 
 class HomePage extends Component {
 
-    notify = () => toast("Wow so easy !");
+    succ = () => toast.success("Welcome " + localStorage.username + "!",
+        {
+            position: toast.POSITION.BOTTOM_LEFT
+    });
+    unsucc = () => toast.error("Wrong credentials!",
+        {
+            position: toast.POSITION.BOTTOM_LEFT
+        });
 
     constructor(props){
         super(props);
@@ -31,19 +38,23 @@ class HomePage extends Component {
             password: this.state.password
 
         };
+        if (!this.state.username || !this.state.password || !this.state.username && !this.state.password){
+            this.unsucc();
+        }else {
+            login(player).then(res => {
 
-        login(player).then(res => {
-
-            if (res) {
-                this.props.history.push('/');
-                localStorage.setItem('username', this.state.username);
-            }
-        })
-            .catch(err => {
-                this.setState({
-                    errors: err,
-                })
+                if (res) {
+                    this.props.history.push('/');
+                    this.succ();
+                }
             })
+                .catch(err => {
+                    this.unsucc();
+                    this.setState({
+                        errors: err,
+                    })
+                })
+        }
     }
 
     render() {
@@ -97,13 +108,10 @@ class HomePage extends Component {
 
 
         return (
-            <div className="container" onLoad={this.notify}>
+            <div className="container">
                 <h1 className="nBrand">BULLDOGS</h1>
                 <h3>Welcome {localStorage.playertoken ? localStorage.username : null}!</h3>
-                {console.log(localStorage.password)}
-                {this.state && this.state.errors && this.state.errors.message && <h4>Errors: Wrong credentials</h4>}
                 {localStorage.playertoken ? loggedInText : nLoggedInText}
-
                 {!localStorage.playertoken ? logInForm : null}
 
 
