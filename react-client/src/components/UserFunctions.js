@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { toast } from "react-toastify";
 
-const succ = () => toast.success("Welcome " + localStorage.username + "!",
+const succLogin = () => toast.success("Welcome " + localStorage.username + "!",
     {
         position: toast.POSITION.BOTTOM_LEFT
     });
-
+const unsuccLogin = () => toast.error("Wrong credentials!",
+    {
+        position: toast.POSITION.BOTTOM_LEFT
+    });
 export const register = newPlayer => {
     return axios
         .post('http://localhost:4000/players/register', {
@@ -34,17 +37,13 @@ export const login = player => {
             localStorage.setItem('id', response.data["id"]);
             localStorage.setItem('username', response.data["username"]);
             localStorage.setItem('isAdmin', response.data["isAdmin"]);
-            succ();
+            succLogin();
             return response.data;
 
         })
         .catch(err => {
-            console.log( err.message);
-            toast.error(err.message,
-                {
-                    position: toast.POSITION.BOTTOM_LEFT
-                })}
-        );
+            unsuccLogin();
+        });
 };
 
 

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { login } from '../../UserFunctions'
 import './HomePage.css';
+import {toast} from "react-toastify";
 
 class HomePage extends Component {
 
-
+    emptyLogin = () => toast.error("Please fill in the empty forms.", {
+       position: toast.POSITION.BOTTOM_LEFT
+    });
 
     constructor(props){
         super(props);
@@ -17,6 +20,7 @@ class HomePage extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
+
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
@@ -31,6 +35,7 @@ class HomePage extends Component {
 
         };
 
+
         login(player).then(res => {
 
             if (res) {
@@ -38,12 +43,20 @@ class HomePage extends Component {
             }
         })
             .catch(err => {
-                this.unsucc();
                 this.setState({
                     errors: err,
                 })
             })
 
+    }
+
+    onClick() {
+        if ((!this.state.username || !this.state.password) || !(this.state.username && this.state.password)){
+            this.emptyLogin();
+        }
+        else if((this.state.username && this.state.password) !== ""){
+            return null
+        }
     }
 
     render() {
@@ -87,7 +100,7 @@ class HomePage extends Component {
                             />
                         </div>
 
-                        <button type="submit" className="btn btn-bulldogs">Log In</button>
+                        <button type="submit" className="btn btn-bulldogs" onClick={this.emptyLogin}>Log In</button>
 
                     </form>
 
