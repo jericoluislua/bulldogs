@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
 import { login } from '../../UserFunctions'
 import './HomePage.css';
-import {toast} from "react-toastify";
 
 class HomePage extends Component {
 
-    succ = () => toast.success("Welcome " + localStorage.username + "!",
-        {
-            position: toast.POSITION.BOTTOM_LEFT
-    });
-    unsucc = () => toast.error("Wrong credentials!",
-        {
-            position: toast.POSITION.BOTTOM_LEFT
-        });
+
 
     constructor(props){
         super(props);
@@ -38,23 +30,20 @@ class HomePage extends Component {
             password: this.state.password
 
         };
-        if (!this.state.username || !this.state.password || !this.state.username && !this.state.password){
-            this.unsucc();
-        }else {
-            login(player).then(res => {
 
-                if (res) {
-                    this.props.history.push('/');
-                    this.succ();
-                }
-            })
-                .catch(err => {
-                    this.unsucc();
-                    this.setState({
-                        errors: err,
-                    })
+        login(player).then(res => {
+
+            if (res) {
+                this.props.history.push('/');
+            }
+        })
+            .catch(err => {
+                this.unsucc();
+                this.setState({
+                    errors: err,
                 })
-        }
+            })
+
     }
 
     render() {

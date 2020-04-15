@@ -68,7 +68,6 @@ class PlayersPage extends Component {
 
     render() {
         const boolAdmin = (localStorage.isAdmin === "1");
-        let chosen_p_id = 0;
         const isAdmin = (p) => {
             return (
             <div className="card-footer">

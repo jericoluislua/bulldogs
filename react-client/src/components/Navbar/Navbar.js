@@ -41,9 +41,10 @@ class Navbar extends Component{
                     <li className="nav-item">
                         <NavLink className="nav-link text-uppercase" to="weight-difference">Weight difference</NavLink>
                     </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link text-uppercase" to="/register">Register</NavLink>
-                    </li>
+                    {localStorage.isAdmin === '1'
+                        ?   <li className="nav-item">
+                                <NavLink className="nav-link text-uppercase" to="/register">Register</NavLink>
+                            </li> : null}
                     <li className="nav-item">
                         <NavLink className="nav-link text-uppercase" to="/players">Players</NavLink>
                     </li>
@@ -62,11 +63,14 @@ class Navbar extends Component{
         return(
             <nav className="navbar navbar-expand-lg navbar-light">
                 <Link className="navbar-brand text-uppercase center nBrand" to="">Bulldogs</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"/>
+                {localStorage.playertoken
+                    ? <button className="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"/>
                 </button>
+                    : null
+                }
 
                 {localStorage.playertoken ? loggedIn : nLoggedIn}
             </nav>

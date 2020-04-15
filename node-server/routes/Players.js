@@ -64,10 +64,8 @@ players.post('/login', async (req, res) => {
            }
        })
        .catch(err => {
-           console.error(err);
-           res.status(500).send("Something unexpected happened.");
+           err.status(401).send("hello");
        });
-    console.log("req query " + req.query.p_id);
 });
 
 //PROFILE
@@ -122,8 +120,7 @@ players.delete('/delete/:p_id', async (req, res) => {
             res.json({status: 'Player ' + req.params.p_id + ' removed.' })
         })
         .catch(err => {
-            res.json('Error: ' + err);
-            res.status(500).send("Something unexpected happened.");
+            res.json("Something unexpected happened.");
 
         })
 });

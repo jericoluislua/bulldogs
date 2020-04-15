@@ -1,4 +1,10 @@
 import axios from 'axios';
+import { toast } from "react-toastify";
+
+const succ = () => toast.success("Welcome " + localStorage.username + "!",
+    {
+        position: toast.POSITION.BOTTOM_LEFT
+    });
 
 export const register = newPlayer => {
     return axios
@@ -28,16 +34,17 @@ export const login = player => {
             localStorage.setItem('id', response.data["id"]);
             localStorage.setItem('username', response.data["username"]);
             localStorage.setItem('isAdmin', response.data["isAdmin"]);
-            if (localStorage.isAdmin === 1){
-
-            }
+            succ();
             return response.data;
 
         })
         .catch(err => {
-            console.log(err);
-            throw err;
-        });
+            console.log( err.message);
+            toast.error(err.message,
+                {
+                    position: toast.POSITION.BOTTOM_LEFT
+                })}
+        );
 };
 
 
@@ -72,10 +79,18 @@ export const loadPlayerData = id => {
         });
 };
 
-export const updateUser = updateData => {
+export const updateUser = player => {
     return axios
-        .put('http://localhost:4000/players/update/', {
-            params:{
-            }
+        .put(`http://localhost:4000/players/update/${player}`, {
+            username: player.username,
+            password: player.password,
+            firstName: player.firstName,
+            lastName: player.lastName,
+            jerseyNumber: player.jerseyNumber,
+            height: player.height,
+            weight: player.weight,
+            isFormer: player.isFormer,
+            isAdmin: player.isAdmin
         })
+        .then()
 };
