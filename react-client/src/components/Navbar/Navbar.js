@@ -53,8 +53,8 @@ class Navbar extends Component{
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-light text-uppercase" type="submit">Search</button>
+                    <input className="form-control ml-sm-auto mr-sm-2 " type="search" placeholder="Search" aria-label="Search"/>
+                    <button className="btn btn-light text-uppercase mr-sm-auto" type="submit">Search</button>
                 </form>
             </div>
 

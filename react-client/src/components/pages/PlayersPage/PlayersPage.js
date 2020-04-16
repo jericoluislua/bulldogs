@@ -39,16 +39,18 @@ class PlayersPage extends Component {
         })*/
     }
 
-    handleDelete(e, p_id){
+    openModal(){
+
+    }
+    modalDelete(e,p_id){
         deletePlayer(p_id).then(res => {
 
             if (res) {
-                console.log("Successfully deleted user: " + this.state.username)
+                console.log("Successfully deleted user: " + this.state.username);
                 this.props.history.push('/players');
             }
         })
     }
-
     componentDidMount() {
         /*const decoded = jwt_decode(window.$userToken);
         console.log(decoded);
@@ -94,16 +96,6 @@ class PlayersPage extends Component {
                             <p><i className="font-weight-bold">Weight: </i>{p.weight}kg</p>
                         </div>
                         {boolAdmin ? isAdmin(p) : null}
-                        {/*<div className="card-footer">
-
-
-
-                            <button className="btn-bulldogs btn" disabled={boolAdmin}>hi</button>
-                            <button className="btn-bulldogs btn"
-                                    disabled={boolAdmin} onClick={e => this.handleDelete(e, p.p_id)}>delete</button>
-
-                        </div>*/}
-                        {/*{boolAdmin ? this.setState(chosen_p_id=p.p_id) : null}*/}
 
                     </div>
                 </div>
