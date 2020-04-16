@@ -26,6 +26,7 @@ class HomePage extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
+    //Used onClick than onSubmit because this method gets activated when a button is clicked, while onSubmit can only be reached after everything has been read
     onClick(e) {
         e.preventDefault();
 

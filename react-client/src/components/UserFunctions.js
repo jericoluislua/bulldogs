@@ -81,7 +81,10 @@ export const loadPlayerData = id => {
 
 export const updateUser = player => {
     return axios
-        .put(`http://localhost:4000/players/update/${player}`, {
+        .put(`http://localhost:4000/players/update/`, {
+            params:{
+                player: player
+            },
             username: player.username,
             password: player.password,
             firstName: player.firstName,
@@ -93,6 +96,9 @@ export const updateUser = player => {
             isAdmin: player.isAdmin
         })
         .then(response => {
-
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
         })
 };

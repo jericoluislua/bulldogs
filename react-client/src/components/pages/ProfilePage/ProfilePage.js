@@ -29,9 +29,6 @@ class ProfilePage extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     componentDidMount() {
-        /*const decoded = jwt_decode(window.$userToken);
-
-        });*/
         loadPlayerData(localStorage.id)
             .then(response => {
                 const decoded = jwt_decode(localStorage.playertoken);
@@ -87,7 +84,6 @@ class ProfilePage extends Component {
                                 placeholder=''
                                 value={this.state.firstName}
                                 onChange={this.onChange}
-                                required
                             />
                         </div>
                         <div className="form-group">
@@ -98,7 +94,6 @@ class ProfilePage extends Component {
                                 placeholder="Enter your Last Name"
                                 value={this.state.lastName}
                                 onChange={this.onChange}
-                                required
                             />
                         </div>
                         <div className="form-group">
@@ -110,7 +105,6 @@ class ProfilePage extends Component {
                                 placeholder="Enter your new Password"
                                 value={this.state.newPassword}
                                 onChange={this.onChange}
-                                required
                             />
                         </div>
                         <div className="form-group">
@@ -122,7 +116,6 @@ class ProfilePage extends Component {
                                 placeholder="Enter your old Password"
                                 value={this.state.password}
                                 onChange={this.onChange}
-                                required
                             />
                         </div>
                         <div className="form-group">
@@ -133,29 +126,26 @@ class ProfilePage extends Component {
                                 placeholder="Enter your Jersey Number"
                                 value={this.state.jerseyNumber}
                                 onChange={this.onChange}
-                                required
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="jerseyNumber">Height</label>
+                            <label htmlFor="height">Height</label>
                             <input
                                 className="form-control"
-                                name="jerseyNumber"
+                                name="height"
                                 placeholder="Enter your height"
                                 value={this.state.height}
                                 onChange={this.onChange}
-                                required
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="jerseyNumber">Weight</label>
+                            <label htmlFor="weight">Weight</label>
                             <input
                                 className="form-control"
-                                name="jerseyNumber"
+                                name="weight"
                                 placeholder="Enter your weight"
                                 value={this.state.weight}
                                 onChange={this.onChange}
-                                required
                             />
                         </div>
                         <div className="form-group">
@@ -166,7 +156,6 @@ class ProfilePage extends Component {
                                 type="checkbox"
                                 value={this.state.isFormer}
                                 onChange={this.onChange}
-                                required
                             />
                             <label htmlFor="isAdmin">Admin</label>
                             <input
@@ -175,7 +164,6 @@ class ProfilePage extends Component {
                                 type="checkbox"
                                 value={this.state.isFormer}
                                 onChange={this.onChange}
-                                required
                             />
 
                         </div>

@@ -17,6 +17,7 @@ import NotFoundPage from "./components/NotFoundPage";
 import RegistrationPage from "./components/pages/RegistrationPage/RegistrationPage";
 import PlayersPage from "./components/pages/PlayersPage/PlayersPage";
 
+//Only logged in players can reach these pages
 const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest}
            render={(props) => (
@@ -25,11 +26,16 @@ const PrivateRoute = ({component: Component, ...rest}) => (
                    : <Redirect to='/' />
            )} />
 );
+
+//Only Admins can reach this/these pages
 const AdminRoute = ({component: Component, ...rest}) => (
     <Route {...rest}
            render={(props) => (
-               !localStorage.isAdmin
-                   ? <Component{...props} />
+               localStorage.playertoken
+                   ?
+                   localStorage.isAdmin === '1'
+                       ? <Component{...props} />
+                       : <Redirect to='/' />
                    : <Redirect to='/' />
            )} />
 );
@@ -52,7 +58,6 @@ export default class App extends Component{
                 <Navbar/>
                 <ToastContainer/>
                 <Switch>
-                    {/*exact makes homepage the default*/}
                     <Route
                         exact
                         path={"/"}

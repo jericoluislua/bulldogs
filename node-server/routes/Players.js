@@ -70,7 +70,6 @@ players.post('/login', async (req, res) => {
 
 //PROFILE
 players.get('/:p_id', async (req, res) => {
-    debugger;
     await Player.findOne({
         where: {
             p_id: req.params.p_id
@@ -102,11 +101,17 @@ players.post('/update/:p_id', async (req, res) => {
        isAdmin: req.body.isAdmin
    };
 
-   Player.update({playerData}, {
+   await Player.update({playerData}, {
        where:{
            p_id: req.params.p_id
        }
    })
+       .then(() => {
+           res.json({status: 'Player ' + req.params.p_id + ' updated.'})
+       })
+       .catch(err => {
+           res.json("Something unexpected happened.")
+       })
 });
 
 players.delete('/delete/:p_id', async (req, res) => {
