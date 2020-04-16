@@ -25,6 +25,15 @@ const PrivateRoute = ({component: Component, ...rest}) => (
                    : <Redirect to='/' />
            )} />
 );
+const AdminRoute = ({component: Component, ...rest}) => (
+    <Route {...rest}
+           render={(props) => (
+               !localStorage.isAdmin
+                   ? <Component{...props} />
+                   : <Redirect to='/' />
+           )} />
+);
+
 
 export default class App extends Component{
 
@@ -55,7 +64,7 @@ export default class App extends Component{
                     <PrivateRoute path="/weight-difference" component={WeightDifferencePage}/>
                     <PrivateRoute path="/profile" component={ProfilePage}/>
                     <PrivateRoute path="/players" component={PlayersPage}/>
-                    <PrivateRoute path="/register" component={RegistrationPage}/>
+                    <AdminRoute path="/register" component={RegistrationPage}/>
                     <Route component={NotFoundPage}/>
                 </Switch>
             </div>
