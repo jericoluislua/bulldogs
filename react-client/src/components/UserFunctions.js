@@ -9,6 +9,7 @@ const unsuccLogin = () => toast.error("Wrong credentials!",
     {
         position: toast.POSITION.BOTTOM_LEFT
     });
+
 export const register = newPlayer => {
     return axios
         .post('http://localhost:4000/players/register', {
@@ -91,5 +92,7 @@ export const updateUser = player => {
             isFormer: player.isFormer,
             isAdmin: player.isAdmin
         })
-        .then()
+        .then(response => {
+
+        })
 };

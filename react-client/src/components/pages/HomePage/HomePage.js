@@ -18,7 +18,7 @@ class HomePage extends Component {
         };
 
         this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
 
@@ -26,7 +26,7 @@ class HomePage extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    onSubmit(e) {
+    onClick(e) {
         e.preventDefault();
 
         const player = {
@@ -35,27 +35,21 @@ class HomePage extends Component {
 
         };
 
-
-        login(player).then(res => {
-
-            if (res) {
-                this.props.history.push('/');
-            }
-        })
-            .catch(err => {
-                this.setState({
-                    errors: err,
-                })
-            })
-
-    }
-
-    onClick() {
         if ((!this.state.username || !this.state.password) || !(this.state.username && this.state.password)){
             this.emptyLogin();
         }
-        else if((this.state.username && this.state.password) !== ""){
-            return null
+        else {
+            login(player).then(res => {
+
+                if (res) {
+                    this.props.history.push('/');
+                }
+            })
+                .catch(err => {
+                    this.setState({
+                        errors: err,
+                    })
+                })
         }
     }
 
@@ -75,7 +69,7 @@ class HomePage extends Component {
         const logInForm = (
             <div className="row d-flex justify-content-center">
                 <div className="col-lg-3 col-md-5 rounded border">
-                    <form onSubmit={this.onSubmit} className="m-3">
+                    <form className="m-3">
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
                             <input
@@ -100,7 +94,7 @@ class HomePage extends Component {
                             />
                         </div>
 
-                        <button type="submit" className="btn btn-bulldogs" onClick={this.emptyLogin}>Log In</button>
+                        <button type="submit" className="btn btn-bulldogs" onClick={this.onClick}>Log In</button>
 
                     </form>
 
