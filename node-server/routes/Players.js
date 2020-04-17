@@ -101,11 +101,10 @@ players.post('/update/:p_id', async (req, res) => {
        isAdmin: req.body.isAdmin
    };
 
-   await Player.update({playerData}, {
-       where:{
-           p_id: req.params.p_id
-       }
-   })
+   const updatedPlayer = await Player.update(
+       { playerData },
+       { where: { p_id: req.params.p_id } }
+   )
        .then(() => {
            res.json({status: 'Player ' + req.params.p_id + ' updated.'})
        })

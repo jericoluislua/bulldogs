@@ -48,7 +48,7 @@ export const login = player => {
 };
 
 
-export const deletePlayer = player => {
+export const removePlayer = player => {
     return axios
         .delete(`http://localhost:4000/players/delete/${player}`)
         .then(response => {

@@ -57,7 +57,9 @@ class ProfilePage extends Component {
             lastName: this.state.lastName,
             jerseyNumber: this.state.jerseyNumber,
             weight: this.state.weight,
-            height: this.state.height
+            height: this.state.height,
+            isFormer: this.state.isFormer,
+            isAdmin: this.state.isAdmin
         };
 
         updateUser(newPlayer).then(res => {
@@ -156,6 +158,8 @@ class ProfilePage extends Component {
                                 type="checkbox"
                                 value={this.state.isFormer}
                                 onChange={this.onChange}
+                                checked={this.state.isFormer === 1 ? 'checked' : null}
+
                             />
                             <label htmlFor="isAdmin">Admin</label>
                             <input
@@ -164,6 +168,7 @@ class ProfilePage extends Component {
                                 type="checkbox"
                                 value={this.state.isFormer}
                                 onChange={this.onChange}
+                                checked={this.state.isAdmin === 1 ? 'checked' : null}
                             />
 
                         </div>

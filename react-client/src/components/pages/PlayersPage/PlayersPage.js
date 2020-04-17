@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import {loadAllPlayerData, deletePlayer} from "../../UserFunctions";
+import {loadAllPlayerData, removePlayer} from "../../UserFunctions";
 import './PlayersPage.css';
+import {toast} from "react-toastify";
 
 class PlayersPage extends Component {
+
+    removePlayerToast = () => toast.success("Succesfully remove");
 
     constructor(props){
         super(props);
@@ -19,38 +22,25 @@ class PlayersPage extends Component {
             players: [],
             errors: {}
         };
+
+        this.modalRemove = this.modalRemove.bind(this);
     }
 
-    onSubmit(e) {
+
+    modalRemove(e, p_id){
         e.preventDefault();
 
-        const player = {
-           p_id: this.state.p_id
-        };
-
-        console.log("chosen id is: " + player);
-
-        /*deletePlayer(player).then(res => {
+        removePlayer(p_id).then(res => {
 
             if (res) {
-                this.props.history.push('/');
-                console.log("Successfully deleted user: " + this.state.username)
-            }
-        })*/
-    }
-
-    openModal(){
-
-    }
-    modalDelete(e,p_id){
-        deletePlayer(p_id).then(res => {
-
-            if (res) {
-                console.log("Successfully deleted user: " + this.state.username);
+                this.removePlayerToast();
                 this.props.history.push('/players');
             }
         })
     }
+
+
+
     componentDidMount() {
         /*const decoded = jwt_decode(window.$userToken);
         console.log(decoded);
@@ -77,13 +67,23 @@ class PlayersPage extends Component {
 
 
                 <button className="btn-bulldogs btn">hi</button>
-                <button className="btn-bulldogs btn" onClick={e => this.handleDelete(e, p.p_id)}>delete</button>
+                <button className="btn-bulldogs btn" data-toggle="modal" data-target={'#modalConfirmation'+p.p_id}>Remove</button>
 
             </div>)
         };
 
+/*        const Modal = (p) => {
+            return (
+
+            )
+        };*/
+
+
         return <div className="container">
             <h1>Players</h1>
+
+
+
             {this.state.players.map((p, id) =>
                 <div className="col-lg-5 m-auto" key={id}>
                     <div className="card-bulldogs card mt-5 mb-5" key={id}>
@@ -94,8 +94,27 @@ class PlayersPage extends Component {
                             <p><i className="font-weight-bold">Jersey Number: </i>{p.jerseyNumber}</p>
                             <p><i className="font-weight-bold">Height: </i>{p.height}cm</p>
                             <p><i className="font-weight-bold">Weight: </i>{p.weight}kg</p>
+                            <div className="modal fade" id={'modalConfirmation'+p.p_id} tabIndex="-1" role="dialog"
+                                 aria-labelledby="modalLabelConfirmation" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered" role="document">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title" id="modalLabelConfirmation">Remove {p.firstName}?</h5>
+                                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemove(e, p.p_id)}>Remove</button>
+                                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        {boolAdmin ? isAdmin(p) : null}
+                        {boolAdmin ? (isAdmin(p)) : null}
+
+
 
                     </div>
                 </div>
