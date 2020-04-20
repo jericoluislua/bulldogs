@@ -25,6 +25,7 @@ export const register = newPlayer => {
         })
         .then(response => {
             succForm("Successfully registered: " + newPlayer.username);
+            window.location.reload();
         })
         .catch(err => {
             unsuccForm("Something wrong happened. Please try again.");
@@ -58,7 +59,7 @@ export const removePlayer = player => {
         .delete(`http://localhost:4000/players/delete/${player}`)
         .then(response => {
             succForm("Successfully removed " + player);
-            console.log(response);
+            window.location.reload();
         })
         .catch(err => {
             console.log(err);
