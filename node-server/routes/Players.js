@@ -16,7 +16,11 @@ players.post('/register', async (req, res) =>{
         password: req.body.password,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        jerseyNumber: req.body.jerseyNumber
+        jerseyNumber: req.body.jerseyNumber,
+        height: req.body.height,
+        weight: req.body.weight,
+        isFormer: req.body.isFormer,
+        isAdmin: req.body.isAdmin
     };
 
    Player.findOne({
@@ -30,6 +34,7 @@ players.post('/register', async (req, res) =>{
                Player.create(playerData)
                    .then(player => {
                        let token = jwt.sign(player.dataValues, process.env.SECRET_KEY, { expiresIn: 1440 });
+                       console.log(req.body.isFormer + " . " + req.body.isAdmin);
                        res.json({ token: token });
                    })
                    .catch(err => {
@@ -113,15 +118,15 @@ players.post('/update/:p_id', async (req, res) => {
        })
 });
 
-players.delete('/delete/:p_id', async (req, res) => {
+players.delete('/delete/:username', async (req, res) => {
 
     await Player.destroy({
         where:{
-            p_id: req.params.p_id
+            username: req.params.username
         }
     },{truncate: true})
         .then(() => {
-            res.json({status: 'Player ' + req.params.p_id + ' removed.' })
+            res.json({status: 'Player ' + req.params.username + ' removed.' })
         })
         .catch(err => {
             res.json("Something unexpected happened.");

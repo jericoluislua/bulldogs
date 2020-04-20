@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { toast } from "react-toastify";
 
-const succLogin = () => toast.success("Welcome " + localStorage.username + "!",
+const succForm = (succ) => toast.success(succ,
     {
         position: toast.POSITION.BOTTOM_LEFT
     });
-const unsuccLogin = () => toast.error("Wrong credentials!",
+const unsuccForm = (unsucc) => toast.error(unsucc,
     {
         position: toast.POSITION.BOTTOM_LEFT
     });
@@ -17,12 +17,17 @@ export const register = newPlayer => {
             password: newPlayer.password,
             firstName: newPlayer.firstName,
             lastName: newPlayer.lastName,
-            jerseyNumber: newPlayer.jerseyNumber
+            jerseyNumber: newPlayer.jerseyNumber,
+            height: newPlayer.height,
+            weight: newPlayer.weight,
+            isFormer: newPlayer.isFormer,
+            isAdmin: newPlayer.isAdmin
         })
         .then(response => {
-            console.log("Successfully registered: " + newPlayer.username + " " + newPlayer.password);
+            succForm("Successfully registered: " + newPlayer.username);
         })
         .catch(err => {
+            unsuccForm("Something wrong happened. Please try again.");
             console.log(err);
         });
 };
@@ -38,12 +43,12 @@ export const login = player => {
             localStorage.setItem('id', response.data["id"]);
             localStorage.setItem('username', response.data["username"]);
             localStorage.setItem('isAdmin', response.data["isAdmin"]);
-            succLogin();
+            succForm("Welcome " + localStorage.username + "!");
             return response.data;
 
         })
         .catch(err => {
-            unsuccLogin();
+            unsuccForm("Wrong credentials!");
         });
 };
 
@@ -52,6 +57,7 @@ export const removePlayer = player => {
     return axios
         .delete(`http://localhost:4000/players/delete/${player}`)
         .then(response => {
+            succForm("Successfully removed " + player);
             console.log(response);
         })
         .catch(err => {
@@ -62,6 +68,11 @@ export const removePlayer = player => {
 export const loadAllPlayerData = player => {
     return axios
         .get('http://localhost:4000/players/', {})
+        .then(response => {
+            succForm("Loaded all players!");
+            return response
+        })
+        .catch(err => {unsuccForm("Something went wrong while loading the players!")})
 };
 
 export const loadPlayerData = id => {

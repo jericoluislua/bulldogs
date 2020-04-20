@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { register } from '../../UserFunctions'
+import {toast} from "react-toastify";
 
 class RegistrationPage extends Component {
+
 
     constructor(props){
         super(props);
@@ -11,15 +13,24 @@ class RegistrationPage extends Component {
             firstName: '',
             lastName: '',
             jerseyNumber: 0,
+            height: 0,
+            weight: 0,
+            isFormer: 0,
+            isAdmin: 0,
             errors: {}
         };
 
         this.onChange = this.onChange.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChange(e) {
-        this.setState({ [e.target.name]: e.target.value })
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    onClick(e) {
+        this.setState({[e.target.name]: 1})
     }
 
     onSubmit(e) {
@@ -30,12 +41,16 @@ class RegistrationPage extends Component {
             password: this.state.password,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            jerseyNumber: this.state.jerseyNumber
+            jerseyNumber: this.state.jerseyNumber,
+            height: this.state.height,
+            weight: this.state.weight,
+            isFormer: this.state.isFormer,
+            isAdmin: this.state.isAdmin,
         };
 
         register(newPlayer).then(res => {
             if (res) {
-                this.props.history.push('/')
+                this.props.history.push('/');
             }
         })
     }
@@ -101,8 +116,48 @@ class RegistrationPage extends Component {
                                     name="jerseyNumber"
                                     placeholder="Enter your Jersey Number"
                                     value={this.state.jerseyNumber}
-                                    onChange={this.onChange}
+                                    onChange={event => this.setState({jerseyNumber: event.target.value.replace(/\D/,'')})}
                                     required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="height">Height</label>
+                                <input
+                                    className="form-control"
+                                    name="height"
+                                    placeholder="Enter your height"
+                                    value={this.state.height}
+                                    onChange={event => this.setState({height: event.target.value.replace(/\D/,'')})}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="weight">Weight</label>
+                                <input
+                                    className="form-control"
+                                    name="weight"
+                                    placeholder="Enter your weight"
+                                    value={this.state.weight}
+                                    onChange={event => this.setState({weight: event.target.value.replace(/\D/,'')})}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="isFormer">Former</label>
+                                <input
+                                    className="form-control"
+                                    name="isFormer"
+                                    type="checkbox"
+                                    onClick={this.onClick}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="isAdmin">Admin</label>
+                                <input
+                                    className="form-control"
+                                    name="isAdmin"
+                                    type="checkbox"
+                                    onClick={this.onClick}
                                 />
                             </div>
 

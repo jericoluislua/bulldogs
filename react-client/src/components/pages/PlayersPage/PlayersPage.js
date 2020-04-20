@@ -5,7 +5,6 @@ import {toast} from "react-toastify";
 
 class PlayersPage extends Component {
 
-    removePlayerToast = () => toast.success("Succesfully remove");
 
     constructor(props){
         super(props);
@@ -23,18 +22,18 @@ class PlayersPage extends Component {
             errors: {}
         };
 
-        this.modalRemove = this.modalRemove.bind(this);
+        this.modalRemovePlayer = this.modalRemovePlayer.bind(this);
     }
 
 
-    modalRemove(e, p_id){
+    modalRemovePlayer(e, username){
         e.preventDefault();
 
-        removePlayer(p_id).then(res => {
+        removePlayer(username).then(res => {
 
             if (res) {
-                this.removePlayerToast();
-                this.props.history.push('/players');
+                /*this.refs.modal('hide');*/
+                this.props.history.push('/');
             }
         })
     }
@@ -63,9 +62,6 @@ class PlayersPage extends Component {
         const isAdmin = (p) => {
             return (
             <div className="card-footer">
-
-
-
                 <button className="btn-bulldogs btn">hi</button>
                 <button className="btn-bulldogs btn" data-toggle="modal" data-target={'#modalConfirmation'+p.p_id}>Remove</button>
 
@@ -95,7 +91,7 @@ class PlayersPage extends Component {
                             <p><i className="font-weight-bold">Height: </i>{p.height}cm</p>
                             <p><i className="font-weight-bold">Weight: </i>{p.weight}kg</p>
                             <div className="modal fade" id={'modalConfirmation'+p.p_id} tabIndex="-1" role="dialog"
-                                 aria-labelledby="modalLabelConfirmation" aria-hidden="true">
+                                 aria-labelledby="modalLabelConfirmation" aria-hidden="true" >
                                 <div className="modal-dialog modal-dialog-centered" role="document">
                                     <div className="modal-content">
                                         <div className="modal-header">
@@ -105,7 +101,7 @@ class PlayersPage extends Component {
                                             </button>
                                         </div>
                                         <div className="modal-footer">
-                                            <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemove(e, p.p_id)}>Remove</button>
+                                            <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Remove</button>
                                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                         </div>
                                     </div>
