@@ -25,7 +25,6 @@ export const register = newPlayer => {
         })
         .then(response => {
             succForm("Successfully registered: " + newPlayer.username);
-            window.location.reload();
         })
         .catch(err => {
             unsuccForm("Something wrong happened. Please try again.");

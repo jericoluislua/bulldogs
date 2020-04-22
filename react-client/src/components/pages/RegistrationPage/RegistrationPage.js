@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { register } from '../../UserFunctions'
-import {toast} from "react-toastify";
 
 class RegistrationPage extends Component {
 
@@ -12,16 +11,16 @@ class RegistrationPage extends Component {
             password: '',
             firstName: '',
             lastName: '',
-            jerseyNumber: 0,
-            height: 0,
-            weight: 0,
-            isFormer: 0,
-            isAdmin: 0,
+            jerseyNumber: '',
+            height: '',
+            weight: '',
+            isFormer: '0',
+            isAdmin: '0',
             errors: {}
         };
 
         this.onChange = this.onChange.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.onClickCheckbox = this.onClickCheckbox.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -29,8 +28,29 @@ class RegistrationPage extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    onClick(e) {
-        this.setState({[e.target.name]: 1})
+    onClickCheckbox(e) {
+        if (e.target.checked){
+            this.setState({[e.target.name]: '1'});
+
+        }else{
+            this.setState({[e.target.name]: '0'});
+        }
+    }
+
+    handleFormReset(e){
+        this.setState({
+            username: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            jerseyNumber: '',
+            height: '',
+            weight: '',
+            isFormer: '0',
+            isAdmin: '0',
+        });
+
+
     }
 
     onSubmit(e) {
@@ -48,11 +68,7 @@ class RegistrationPage extends Component {
             isAdmin: this.state.isAdmin,
         };
 
-        register(newPlayer).then(res => {
-            if (res) {
-                this.props.history.push('/');
-            }
-        })
+        register(newPlayer).then(() => {this.handleFormReset()})
     }
 
     render() {
@@ -63,7 +79,7 @@ class RegistrationPage extends Component {
 
                 <div className="row d-flex justify-content-center">
                     <div className="col-lg-4 rounded border">
-                        <form onSubmit={this.onSubmit} className="m-3">
+                        <form onSubmit={this.onSubmit}  className="m-3">
                             <div className="form-group">
                                 <label htmlFor="username">Username</label>
                                 <input
@@ -148,7 +164,7 @@ class RegistrationPage extends Component {
                                     className="form-control"
                                     name="isFormer"
                                     type="checkbox"
-                                    onClick={this.onClick}
+                                    onClick={this.onClickCheckbox}
                                 />
                             </div>
                             <div className="form-group">
@@ -157,7 +173,7 @@ class RegistrationPage extends Component {
                                     className="form-control"
                                     name="isAdmin"
                                     type="checkbox"
-                                    onClick={this.onClick}
+                                    onClick={this.onClickCheckbox}
                                 />
                             </div>
 
