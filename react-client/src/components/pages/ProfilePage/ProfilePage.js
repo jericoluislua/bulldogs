@@ -110,7 +110,7 @@ class ProfilePage extends Component {
                                 className="form-control"
                                 name="firstName"
                                 placeholder=''
-                                value={this.state.firstName}
+                                value={this.state.firstName || ''}
                                 onChange={this.onChange}
                             />
                         </div>
@@ -120,7 +120,7 @@ class ProfilePage extends Component {
                                 className="form-control"
                                 name="lastName"
                                 placeholder="Enter your Last Name"
-                                value={this.state.lastName}
+                                value={this.state.lastName || ''}
                                 onChange={this.onChange}
                             />
                         </div>
@@ -131,7 +131,7 @@ class ProfilePage extends Component {
                                 type="password"
                                 name="newPassword"
                                 placeholder="Enter your new Password"
-                                value={this.state.newPassword}
+                                value={this.state.newPassword || ''}
                                 onChange={this.onChange}
                             />
                         </div>
@@ -142,7 +142,7 @@ class ProfilePage extends Component {
                                 type="password"
                                 name="password"
                                 placeholder="Enter your old Password"
-                                value={this.state.password}
+                                value={this.state.password || ''}
                                 onChange={this.onChange}
                             />
                         </div>
@@ -152,7 +152,7 @@ class ProfilePage extends Component {
                                 className="form-control"
                                 name="jerseyNumber"
                                 placeholder="Enter your Jersey Number"
-                                value={this.state.jerseyNumber}
+                                value={this.state.jerseyNumber || ''}
                                 onChange={this.onChange}
                             />
                         </div>
@@ -162,7 +162,7 @@ class ProfilePage extends Component {
                                 className="form-control"
                                 name="height"
                                 placeholder="Enter your height"
-                                value={this.state.height}
+                                value={this.state.height || ''}
                                 onChange={this.onChange}
                             />
                         </div>
@@ -172,7 +172,7 @@ class ProfilePage extends Component {
                                 className="form-control"
                                 name="weight"
                                 placeholder="Enter your weight"
-                                value={this.state.weight}
+                                value={this.state.weight || ''}
                                 onChange={this.onChange}
                             />
                         </div>
@@ -183,7 +183,7 @@ class ProfilePage extends Component {
                                     className="form-control"
                                     name="isFormer"
                                     type="checkbox"
-                                    checked={this.state.isFormer}
+                                    checked={this.state.isFormer || false}
                                     onChange={this.onChangeCheckbox}
 
                                 />
@@ -195,7 +195,7 @@ class ProfilePage extends Component {
                                         className="form-control"
                                         name="isAdmin"
                                         type="checkbox"
-                                        checked={this.state.isAdmin === 1 ? 'checked' : null}
+                                        checked={this.state.isAdmin  || false}
                                         onChange={this.onChangeCheckbox}
                                     />
                                 </div> : null
