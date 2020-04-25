@@ -93,11 +93,10 @@ players.get('/:p_id', async (req, res) => {
         });
 });
 
-players.post('/update/:p_id', async (req, res) => {
+players.put('/update/', async (req, res) => {
    const playerData = {
-       username: req.body.username,
-       password: req.body.newPassword,
        firstName: req.body.firstName,
+       password: req.body.newPassword,
        lastName: req.body.lastName,
        jerseyNumber: req.body.jerseyNumber,
        height: req.body.height,
@@ -106,15 +105,17 @@ players.post('/update/:p_id', async (req, res) => {
        isAdmin: req.body.isAdmin
    };
 
-   const updatedPlayer = await Player.update(
-       { playerData },
-       { where: { p_id: req.params.p_id } }
+   await Player.update(
+       playerData,
+       {
+           where: { jerseyNumber: req.body.jerseyNumber }
+       }
    )
-       .then(() => {
-           res.json({status: 'Player ' + req.params.p_id + ' updated.'})
+       .then(player => {
+           res.json(player)
        })
        .catch(err => {
-           res.json("Something unexpected happened.")
+           res.status(500).send(err.message);
        })
 });
 

@@ -54,6 +54,7 @@ class ProfilePage extends Component {
             .then(() => {
                 const decoded = jwt_decode(localStorage.playertoken);
                 this.setState({
+                    username: decoded.username,
                     firstName: decoded.firstName,
                     lastName: decoded.lastName,
                     jerseyNumber: decoded.jerseyNumber,
@@ -87,6 +88,7 @@ class ProfilePage extends Component {
 
         updateUser(newPlayer).then(res => {
             if (res) {
+                localStorage.setItem('isAdmin', this.state.isAdmin);
                 this.props.history.push('/')
             }
         })
@@ -104,6 +106,15 @@ class ProfilePage extends Component {
                 <div className="card-header">{this.state.username}</div>
                 <div className="card-body">
                     <form onSubmit={this.onSubmit} className="m-3">
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input
+                                className="form-control"
+                                name="username"
+                                value={this.state.username || ''}
+                                readOnly
+                            />
+                        </div>
                         <div className="form-group">
                             <label htmlFor="firstName">First Name</label>
                             <input
@@ -153,7 +164,7 @@ class ProfilePage extends Component {
                                 name="jerseyNumber"
                                 placeholder="Enter your Jersey Number"
                                 value={this.state.jerseyNumber || ''}
-                                onChange={this.onChange}
+                                readOnly
                             />
                         </div>
                         <div className="form-group">
@@ -176,36 +187,33 @@ class ProfilePage extends Component {
                                 onChange={this.onChange}
                             />
                         </div>
-                        <div className="form-group row">
-                            <div className="col-lg-6 col-md-6">
-                                <label htmlFor="isFormer">Former</label>
-                                <input
-                                    className="form-control"
-                                    name="isFormer"
-                                    type="checkbox"
-                                    checked={this.state.isFormer || false}
-                                    onChange={this.onChangeCheckbox}
 
-                                />
-                            </div>
                             {localStorage.isAdmin === "1" ?
-                                <div className="col-lg-6 col-md-6">
-                                    <label htmlFor="isAdmin">Admin</label>
-                                    <input
-                                        className="form-control"
-                                        name="isAdmin"
-                                        type="checkbox"
-                                        checked={this.state.isAdmin  || false}
-                                        onChange={this.onChangeCheckbox}
-                                    />
-                                </div> : null
+                                <div className="form-group row">
+                                    <div className="col-lg-6 col-md-6">
+                                        <label htmlFor="isFormer">Former</label>
+                                        <input
+                                            className="form-control"
+                                            name="isFormer"
+                                            type="checkbox"
+                                            checked={this.state.isFormer || false}
+                                            onChange={this.onChangeCheckbox}
+
+                                        />
+                                    </div>
+                                    <div className="col-lg-6 col-md-6">
+                                        <label htmlFor="isAdmin">Admin</label>
+                                        <input
+                                            className="form-control"
+                                            name="isAdmin"
+                                            type="checkbox"
+                                            checked={this.state.isAdmin  || false}
+                                            onChange={this.onChangeCheckbox}
+                                        />
+                                    </div>
+                                </div>: null
                             }
-
-
-                        </div>
-
                         <button type="submit" className="btn btn-bulldogs" >Update</button>
-
                     </form>
                 </div>
             </div>

@@ -90,13 +90,9 @@ export const loadPlayerData = id => {
         });
 };
 
-export const updateUser = player => {
+export const updateUser = (player) => {
     return axios
         .put(`http://localhost:4000/players/update/`, {
-            params:{
-                player: player
-            },
-            username: player.username,
             password: player.password,
             firstName: player.firstName,
             lastName: player.lastName,
