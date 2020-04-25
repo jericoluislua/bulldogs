@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {loadAllPlayerData, removePlayer} from "../../UserFunctions";
 import './PlayersPage.css';
-import {toast} from "react-toastify";
 
 class PlayersPage extends Component {
 
@@ -41,14 +40,6 @@ class PlayersPage extends Component {
 
 
     componentDidMount() {
-        /*const decoded = jwt_decode(window.$userToken);
-        console.log(decoded);
-        this.setState({
-            username: decoded.username,
-            firstName: decoded.firstName,
-            lastName: decoded.lastName,
-            jerseyNumber: decoded.jerseyNumber
-        });*/
         loadAllPlayerData().then(response => {
             this.setState({players: response.data.data});
             console.log(response.data.data)
