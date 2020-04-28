@@ -58,7 +58,6 @@ export const removePlayer = player => {
         .delete(`http://localhost:4000/players/delete/${player}`)
         .then(response => {
             succForm("Successfully removed " + player);
-            window.location.reload();
         })
         .catch(err => {
             console.log(err);

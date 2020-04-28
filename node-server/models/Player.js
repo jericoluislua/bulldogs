@@ -26,7 +26,7 @@ module.exports = db.sequelize.define(
             allowNull: false
         },
         jerseyNumber: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             allowNull: false
         },
         height: {

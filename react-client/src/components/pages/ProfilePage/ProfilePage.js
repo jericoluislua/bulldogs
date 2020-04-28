@@ -60,14 +60,16 @@ class ProfilePage extends Component {
                     jerseyNumber: decoded.jerseyNumber,
                     height: decoded.height,
                     weight: decoded.weight,
-                    isFormer: decoded.isFormer
-
+                    isFormer: decoded.isFormer,
+                    isAdmin: decoded.isAdmin
                 });
+/*
                 if (localStorage.isAdmin === '1'){
                     this.setState({isAdmin: decoded.isAdmin});
                 }
+*/
             })
-                .catch(err => console.log(err));
+            .catch(err => console.log(err));
 
     }
 

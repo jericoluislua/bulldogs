@@ -4,7 +4,6 @@ import './PlayersPage.css';
 
 class PlayersPage extends Component {
 
-
     constructor(props){
         super(props);
         this.state = {
@@ -22,8 +21,15 @@ class PlayersPage extends Component {
         };
 
         this.modalRemovePlayer = this.modalRemovePlayer.bind(this);
+        /*this.reloadData = this.reloadData(this);*/
     }
 
+    reloadData = () => {
+        loadAllPlayerData().then(response => {
+            this.setState({players: response.data.data});
+        })
+            .catch(err => console.log(err));
+    };
 
     modalRemovePlayer(e, username){
         e.preventDefault();
@@ -31,20 +37,15 @@ class PlayersPage extends Component {
         removePlayer(username).then(res => {
 
             if (res) {
-                /*this.refs.modal('hide');*/
-                this.props.history.push('/');
+                this.reloadData();
             }
         })
     }
 
 
-
     componentDidMount() {
-        loadAllPlayerData().then(response => {
-            this.setState({players: response.data.data});
-            console.log(response.data.data)
-        })
-            .catch(err => console.log(err));
+        this.reloadData();
+        setInterval(this.reloadData, 20000);
     }
 
 
@@ -53,10 +54,60 @@ class PlayersPage extends Component {
         const isAdmin = (p) => {
             return (
             <div className="card-footer">
-                <button className="btn-bulldogs btn">hi</button>
-                <button className="btn-bulldogs btn" data-toggle="modal" data-target={'#modalConfirmation'+p.p_id}>Remove</button>
+                <button className="btn-bulldogs btn" data-toggle="modal" data-target={'#modalEdit'+p.p_id}>Edit</button>
+                <button className="btn-bulldogs btn" data-toggle="modal" data-target={'#modalRemoveConfirmation'+p.p_id}>Remove</button>
 
             </div>)
+        };
+
+        const modalRemove = (p) => {
+            return (
+                <div className="modal fade" id={'modalRemoveConfirmation'+p.p_id} tabIndex="-1" role="dialog"
+                     aria-labelledby="modalRemoveLabelConfirmation" aria-hidden="true" >
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="modalRemoveLabelConfirmation">Remove {p.firstName}?</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Remove</button>
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        };
+
+        const modalEdit = (p) => {
+            return (
+                <div className="modal fade" id={'modalEdit'+p.p_id} tabIndex="-1" role="dialog"
+                     aria-labelledby="modalEditLabel" aria-hidden="true" >
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="modalEditLabel">Edit {p.username}</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-footer d-flex">
+                                <div className="d-flex justify-content-start">
+                                    <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Revert<br/>password</button>
+                                    <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Make<br/>Admin</button>
+                                    <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Make<br/>Former</button>
+                                </div>
+                                <div className="d-flex justify-content-end">
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
         };
 
 /*        const Modal = (p) => {
@@ -81,23 +132,8 @@ class PlayersPage extends Component {
                             <p><i className="font-weight-bold">Jersey Number: </i>{p.jerseyNumber}</p>
                             <p><i className="font-weight-bold">Height: </i>{p.height}cm</p>
                             <p><i className="font-weight-bold">Weight: </i>{p.weight}kg</p>
-                            <div className="modal fade" id={'modalConfirmation'+p.p_id} tabIndex="-1" role="dialog"
-                                 aria-labelledby="modalLabelConfirmation" aria-hidden="true" >
-                                <div className="modal-dialog modal-dialog-centered" role="document">
-                                    <div className="modal-content">
-                                        <div className="modal-header">
-                                            <h5 className="modal-title" id="modalLabelConfirmation">Remove {p.firstName}?</h5>
-                                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div className="modal-footer">
-                                            <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Remove</button>
-                                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {modalRemove(p)}
+                            {modalEdit(p)}
                         </div>
                         {boolAdmin ? (isAdmin(p)) : null}
 
