@@ -54,7 +54,7 @@ class Navbar extends Component{
         );
 
         return(
-            <nav className="navbar navbar-expand-lg navbar-light">
+            <nav className="navbar navbar-expand-xxl navbar-light" style={{backgroundColor: '#de230e'}}>
                 <Link className="navbar-brand text-uppercase center nBrand" to="">Bulldogs</Link>
                 {localStorage.playertoken
                     ?
