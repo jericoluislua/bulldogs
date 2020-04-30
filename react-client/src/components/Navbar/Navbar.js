@@ -45,7 +45,7 @@ class Navbar extends Component{
                         <a href="/" className="nav-link text-uppercase" onClick={this.logOut.bind(this)}>Logout</a>
                     </li>
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
+                <form className="form-inline my-2 my-xl-0">
                     <input className="form-control col-md-7 col-sm-5 col-5 ml-sm-search mr-sm-2 mr-2" type="search" placeholder="Search" aria-label="Search"/>
                     <button className="btn btn-light text-uppercase mr-sm-auto" type="submit">Search</button>
                 </form>

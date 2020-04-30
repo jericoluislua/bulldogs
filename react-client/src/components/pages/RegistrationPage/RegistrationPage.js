@@ -77,8 +77,8 @@ class RegistrationPage extends Component {
                 <h1 className="nBrand">BULLDOGS</h1>
                 <h3>!For test purposes only!</h3>
 
-                <div className="row d-flex justify-content-center">
-                    <div className="col-lg-4 rounded border">
+                <div className="col-lg-7 col-md-12 col-sm-12 col-12 m-auto">
+                    <div className="card mt-5 mb-5">
                         <form onSubmit={this.onSubmit}  className="m-3">
                             <div className="form-group">
                                 <label htmlFor="username">Username</label>
@@ -158,23 +158,27 @@ class RegistrationPage extends Component {
                                     required
                                 />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="isFormer">Former</label>
-                                <input
-                                    className="form-control"
-                                    name="isFormer"
-                                    type="checkbox"
-                                    onClick={this.onClickCheckbox}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="isAdmin">Admin</label>
-                                <input
-                                    className="form-control"
-                                    name="isAdmin"
-                                    type="checkbox"
-                                    onClick={this.onClickCheckbox}
-                                />
+                            <div className="form-group row">
+                                <div className="col-lg-6 col-md-6 col-sm-6">
+                                    <label htmlFor="isFormer">Former</label>
+                                    <input
+                                        className="form-control"
+                                        name="isFormer"
+                                        type="checkbox"
+                                        onClick={this.onClickCheckbox}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-md-6 col-sm-6">
+                                    <div className="form-group">
+                                        <label htmlFor="isAdmin">Admin</label>
+                                        <input
+                                            className="form-control"
+                                            name="isAdmin"
+                                            type="checkbox"
+                                            onClick={this.onClickCheckbox}
+                                        />
+                                    </div>
+                                </div>
                             </div>
 
                             <button type="submit" className="btn btn-bulldogs">Register</button>
