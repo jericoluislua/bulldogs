@@ -25,20 +25,20 @@ class Navbar extends Component{
         const loggedIn = (
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto nav-tabs">
-                    <li className="nav-item mr-2">
+                    <li className="nav-item mr-xl-2">
                         <NavLink className="nav-link text-uppercase" to="profile">Profile</NavLink>
                     </li>
-                    <li className="nav-item mr-2">
+                    <li className="nav-item mr-xl-2">
                         <NavLink className="nav-link text-uppercase" to="height-difference">Height difference</NavLink>
                     </li>
-                    <li className="nav-item mr-2">
+                    <li className="nav-item mr-xl-2">
                         <NavLink className="nav-link text-uppercase" to="weight-difference">Weight difference</NavLink>
                     </li>
                     {localStorage.isAdmin === '1'
-                        ?   <li className="nav-item mr-2">
+                        ?   <li className="nav-item mr-xl-2">
                                 <NavLink className="nav-link text-uppercase" to="/register">Register</NavLink>
                             </li> : null}
-                    <li className="nav-item mr-2">
+                    <li className="nav-item mr-xl-2">
                         <NavLink className="nav-link text-uppercase" to="/players">Players</NavLink>
                     </li>
                     <li className="nav-item">
@@ -46,7 +46,7 @@ class Navbar extends Component{
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control col-md-7 ml-sm-auto mr-sm-2 " type="search" placeholder="Search" aria-label="Search"/>
+                    <input className="form-control col-md-7 col-sm-5 col-5 ml-sm-search mr-sm-2 mr-2" type="search" placeholder="Search" aria-label="Search"/>
                     <button className="btn btn-light text-uppercase mr-sm-auto" type="submit">Search</button>
                 </form>
             </div>

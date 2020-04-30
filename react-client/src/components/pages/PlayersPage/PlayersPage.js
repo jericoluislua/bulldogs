@@ -123,7 +123,7 @@ class PlayersPage extends Component {
 
 
             {this.state.players.map((p, id) =>
-                <div className="col-lg-5 m-auto" key={id}>
+                <div className="col-xl-5 col-lg-6 col-md-8 col-sm-11 m-auto" key={id}>
                     <div className="card-bulldogs card mt-5 mb-5" key={id}>
                         <div className="card-header">{p.username}</div>
                         <div className="card-body">

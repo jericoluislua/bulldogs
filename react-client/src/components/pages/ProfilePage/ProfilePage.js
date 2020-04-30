@@ -103,7 +103,7 @@ class ProfilePage extends Component {
 
         return <div className="container">
             <h1 className="mt-1">Profile</h1>
-            <div className="col-lg-5 m-auto">
+            <div className="col-lg-7 col-md-8 col-sm-10 col-12 m-auto">
             <div className="card card-bulldogs mt-5 mb-5">
                 <div className="card-header">{this.state.username}</div>
                 <div className="card-body">
@@ -192,7 +192,7 @@ class ProfilePage extends Component {
 
                             {localStorage.isAdmin === "1" ?
                                 <div className="form-group row">
-                                    <div className="col-lg-6 col-md-6">
+                                    <div className="col-lg-6 col-md-6 col-sm-6">
                                         <label htmlFor="isFormer">Former</label>
                                         <input
                                             className="form-control"
@@ -203,7 +203,7 @@ class ProfilePage extends Component {
 
                                         />
                                     </div>
-                                    <div className="col-lg-6 col-md-6">
+                                    <div className="col-lg-6 col-md-6 col-sm-6">
                                         <label htmlFor="isAdmin">Admin</label>
                                         <input
                                             className="form-control"
