@@ -45,7 +45,7 @@ class PlayersPage extends Component {
 
     componentDidMount() {
         this.reloadData();
-        setInterval(this.reloadData, 20000);
+        setInterval(this.reloadData, 30000);
     }
 
 
@@ -54,8 +54,8 @@ class PlayersPage extends Component {
         const isAdmin = (p) => {
             return (
             <div className="card-footer">
-                <button className="btn-bulldogs btn" data-toggle="modal" data-target={'#modalEdit'+p.p_id}>Edit</button>
-                <button className="btn-bulldogs btn" data-toggle="modal" data-target={'#modalRemoveConfirmation'+p.p_id}>Remove</button>
+                <button className="btn-bulldogs btn ml-auto mr-5" data-toggle="modal" data-target={'#modalEdit'+p.p_id}>Edit</button>
+                <button className="btn-bulldogs btn ml-3 mr-auto" data-toggle="modal" data-target={'#modalRemoveConfirmation'+p.p_id}>Remove</button>
 
             </div>)
         };
@@ -94,13 +94,13 @@ class PlayersPage extends Component {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div className="modal-footer d-flex">
-                                <div className="d-flex justify-content-start">
-                                    <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Revert<br/>password</button>
-                                    <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Make<br/>Admin</button>
+                            <div className="modal-footer d-flex justify-content-start">
+                                <div>
+                                    <button type="button" className="btn btn-bulldogs mr-4" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Revert<br/>password</button>
+                                    <button type="button" className="btn btn-bulldogs mr-4" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Make<br/>Admin</button>
                                     <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Make<br/>Former</button>
                                 </div>
-                                <div className="d-flex justify-content-end">
+                                <div className="d-flex justify-content-end flex-fill">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
