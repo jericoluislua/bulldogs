@@ -37,7 +37,7 @@ class RegistrationPage extends Component {
         }
     }
 
-    handleFormReset(e){
+    handleFormReset(){
         this.setState({
             username: '',
             password: '',
@@ -49,7 +49,10 @@ class RegistrationPage extends Component {
             isFormer: '0',
             isAdmin: '0',
         });
-
+        let isAdminCheckbox = document.getElementById("isAdminCheckbox");
+        isAdminCheckbox.checked = false;
+        let isFormerCheckbox = document.getElementById("isFormerCheckbox");
+        isFormerCheckbox.checked = false;
 
     }
 
@@ -165,6 +168,7 @@ class RegistrationPage extends Component {
                                         className="form-control"
                                         name="isFormer"
                                         type="checkbox"
+                                        id="isFormerCheckbox"
                                         onClick={this.onClickCheckbox}
                                     />
                                 </div>
@@ -175,6 +179,7 @@ class RegistrationPage extends Component {
                                             className="form-control"
                                             name="isAdmin"
                                             type="checkbox"
+                                            id="isAdminCheckbox"
                                             onClick={this.onClickCheckbox}
                                         />
                                     </div>
