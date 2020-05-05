@@ -64,7 +64,7 @@ export const removePlayer = player => {
         })
 };
 
-export const loadAllPlayerData = player => {
+export const loadAllPlayerData = _ => {
     return axios
         .get('http://localhost:4000/players/', {})
         .then(response => {
@@ -89,7 +89,7 @@ export const loadPlayerData = id => {
         });
 };
 
-export const updateUser = (player) => {
+export const updateUser = player => {
     return axios
         .put(`http://localhost:4000/players/update/`, {
             password: player.password,
@@ -102,9 +102,23 @@ export const updateUser = (player) => {
             isAdmin: player.isAdmin
         })
         .then(response => {
+            succForm("The account has successfully been updated.");
             console.log(response);
         })
-        .catch(error => {
-            console.log(error);
+        .catch(err => {
+            console.log(err);
         })
 };
+
+export const makeAdmin = _ => {
+    return axios
+        .put(`http://localhost:4000/players/update/`, {
+            isAdmin: 1
+        })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}

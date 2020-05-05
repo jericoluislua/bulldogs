@@ -208,6 +208,7 @@
 @font-face {
     font-family: "Bulldogs";
     src: url("../../fonts/aspire-smallcaps/AspireSC-Regular.ttf");
+    font-display: swap;
 }
 
 

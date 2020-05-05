@@ -35,17 +35,14 @@ class PlayersPage extends Component {
         e.preventDefault();
 
         removePlayer(username).then(res => {
-
-            if (res) {
-                this.reloadData();
-            }
+            this.reloadData();
         })
     }
 
 
+
     componentDidMount() {
         this.reloadData();
-        setInterval(this.reloadData, 30000);
     }
 
 
@@ -97,7 +94,7 @@ class PlayersPage extends Component {
                             <div className="modal-footer d-flex justify-content-start">
                                 <div>
                                     <button type="button" className="btn btn-bulldogs mr-4" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Revert<br/>password</button>
-                                    <button type="button" className="btn btn-bulldogs mr-4" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Make<br/>Admin</button>
+                                    <button type="button" className="btn btn-bulldogs mr-4" onClick={e => this.makeAdmin(e, p.username)} data-dismiss="modal" aria-label="Close">Make<br/>Admin</button>
                                     <button type="button" className="btn btn-bulldogs" onClick={e => this.modalRemovePlayer(e, p.username)} data-dismiss="modal" aria-label="Close">Make<br/>Former</button>
                                 </div>
                                 <div className="d-flex justify-content-end flex-fill">

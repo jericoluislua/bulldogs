@@ -163,9 +163,9 @@ class RegistrationPage extends Component {
                             </div>
                             <div className="form-group row">
                                 <div className="col-lg-6 col-md-6 col-sm-6">
-                                    <label htmlFor="isFormer">Former</label>
+                                    <label htmlFor="isFormer" className='form-check-label'>Former</label>
                                     <input
-                                        className="form-control"
+                                        className="form-control form-check-input"
                                         name="isFormer"
                                         type="checkbox"
                                         id="isFormerCheckbox"
