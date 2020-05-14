@@ -24,13 +24,6 @@ class PlayersPage extends Component {
         /*this.reloadData = this.reloadData(this);*/
     }
 
-    reloadData = () => {
-        loadAllPlayerData().then(response => {
-            this.setState({players: response.data.data});
-        })
-            .catch(err => console.log(err));
-    };
-
     modalRemovePlayer(e, username){
         e.preventDefault();
 
@@ -39,6 +32,12 @@ class PlayersPage extends Component {
         })
     }
 
+    reloadData = () => {
+        loadAllPlayerData().then(response => {
+            this.setState({players: response.data});
+        })
+            .catch(err => console.log(err));
+    };
 
 
     componentDidMount() {

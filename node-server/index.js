@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 
 
 //request n respond
-app.get('/players', (req, res) => {
+/*app.get('/players', (req, res) => {
    connection.query(SELECT_ALL_BPLAYERS_QUERY, (err, results) => {
       if(err) {
          return res.send(err);
@@ -45,7 +45,7 @@ app.get('/players', (req, res) => {
          });
       }
    });
-});
+});*/
 
 //: gives you certain database params
 /*app.get('/player/:p_id', (req, res) => {

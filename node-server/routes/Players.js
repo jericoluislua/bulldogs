@@ -73,6 +73,34 @@ players.post('/login', async (req, res) => {
        });
 });
 
+//LOAD ALL PLAYERS
+players.get('', async (req, res) => {
+    await Player.findAll()
+        .then(player => {
+            if(player) {
+                res.json(player)
+            } else {
+                res.send('Player does not exist.');
+            }
+        })
+        .catch(err => {res.send(err)})
+});
+
+//lOAD ALL PLAYERS HEIGHTS
+players.get('/heights', async (req, res) => {
+    await Player.findAll({
+        attributes: ['firstName','height']
+    })
+        .then(player => {
+            if(player){
+                res.json(player)
+            } else {
+                res.send('No height')
+            }
+        })
+        .catch(err => {res.send(err)})
+});
+
 //PROFILE
 players.get('/:p_id', async (req, res) => {
     await Player.findOne({
@@ -93,6 +121,7 @@ players.get('/:p_id', async (req, res) => {
         });
 });
 
+//UPDATE OWN PROFILE
 players.put('/update/', async (req, res) => {
    const playerData = {
        firstName: req.body.firstName,
@@ -119,6 +148,7 @@ players.put('/update/', async (req, res) => {
        })
 });
 
+//DELETE
 players.delete('/delete/:username', async (req, res) => {
 
     await Player.destroy({
@@ -134,5 +164,7 @@ players.delete('/delete/:username', async (req, res) => {
 
         })
 });
+
+
 
 module.exports = players;
