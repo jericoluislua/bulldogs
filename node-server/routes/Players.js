@@ -86,20 +86,7 @@ players.get('', async (req, res) => {
         .catch(err => {res.send(err)})
 });
 
-//lOAD ALL PLAYERS HEIGHTS
-players.get('/heights', async (req, res) => {
-    await Player.findAll({
-        attributes: ['firstName','height']
-    })
-        .then(player => {
-            if(player){
-                res.json(player)
-            } else {
-                res.send('No height')
-            }
-        })
-        .catch(err => {res.send(err)})
-});
+
 
 //PROFILE
 players.get('/:p_id', async (req, res) => {

@@ -1,64 +1,7 @@
 import React, {Component} from 'react';
 import { Chart } from 'react-charts';
-import {loadAllPlayersHeights} from "../../UserFunctions";
+import {loadAllPlayerData} from "../../UserFunctions";
 import '../../../App.css'
-
-
-
-/*
-let data = [
-        {
-            label: "Players' heights",
-            data: this.state.players
-        }
-    ];
-*/
-
-
-
-/*const barChart = (
-    // A react-chart hyper-responsively and continuously fills the available
-    // space of its parent element automatically
-    <div
-        style={{
-            width: '400px',
-            height: '300px'
-        }}
-        className="chart"
-    >
-        <Chart data={data}
-               axes={axes}
-               series={series}
-               tooltip
-               /!*focus={}
-               getDatums={}
-               getLabel={}
-               getPrimary={}
-               getPrimaryAxisID={}
-               getR={} getSecondary={}
-               getSecondaryAxisID={}
-               getSeriesID={}
-               getSeriesOrder={}
-               grouping={}*!//>
-    </div>
-);*/
-
-
-const series = ({
-    type: 'bar'
-});
-
-
-const axes = [
-    {primary: true, type: 'ordinal', position: 'bottom'},
-    {type: 'linear', position: 'left'}
-];
-
-const style = ({
-    width: '400px',
-    height: '300px'
-});
-
 
 
     class HeightDifferencePage extends Component {
@@ -72,51 +15,52 @@ const style = ({
 
         }
 
-
-
-
-
-
-
         reloadData = () => {
-            loadAllPlayersHeights().then(response => {
+            loadAllPlayerData().then(response => {
                 this.setState({players: response.data});
             })
                 .catch(err => console.log(err));
 
         };
 
-
         componentDidMount() {
             this.reloadData();
         }
 
-
-
         render() {
 
-            const data = [
+            let data = [
                 {
                     label: "Players' heights",
-                    data: this.state.players
+                    data: this.state.players.map((p) => [p.firstName, p.height])
                 }
             ];
+            if (data[0].data.length === 0) {
+                return null
+            }
+            console.log(data);
 
+            const axes = [
+                {primary: true, type: 'ordinal', position: 'bottom'},
+                {type: 'linear', position: 'left'}
+            ];
+
+            let series = (
+                {type: 'bar'}
+            );
 
             const barChart = (
                 // A react-chart hyper-responsively and continuously fills the available
                 // space of its parent element automatically
                 <div
+                    className="chart"
                     style={{
                         width: '400px',
-                        height: '300px'
-                    }}
-                    className="chart"
+                        height: '300px'}}
                 >
                     <Chart data={data}
                            axes={axes}
                            series={series}
-                           style={style}
                            tooltip
 
                         /*focus={}
@@ -131,17 +75,11 @@ const style = ({
                         grouping={}*//>
                 </div>
             );
+
             return(
                 <div className="container">
                     <h1>Players' height difference</h1>
                     {barChart}
-                    {console.log(this.state.players[0])}
-{/*
-
-                        {this.state.height.map((p, id) =>
-
-
-*/}
                 </div>
             )
     }

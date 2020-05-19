@@ -74,16 +74,6 @@ export const loadAllPlayerData = _ => {
         .catch(err => {unsuccForm("Something went wrong while loading the players!")})
 };
 
-export const loadAllPlayersHeights = _ => {
-    return axios
-        .get('http://localhost:4000/players/heights', {})
-        .then(response => {
-            succForm("Loaded all players' heights!");
-            return response
-        })
-        .catch(err => {unsuccForm("Something went wrong while loading the players!")})
-};
-
 export const loadPlayerData = id => {
     return axios
         .get('http://localhost:4000/players/', {
